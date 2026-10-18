@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c48wjvqcslf6h"
+path="res://.godot/imported/Corner_ExteriorWide_Wood.obj-b9c907ea716d99c471555ca33fe684dd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Corner_ExteriorWide_Wood.obj-b9c907ea716d99c471555ca33fe684dd.mesh"]
+
+source_file="res://Medieval Village MegaKit[Standard]/OBJ/Corner_ExteriorWide_Wood.obj"
+dest_files=["res://.godot/imported/Corner_ExteriorWide_Wood.obj-b9c907ea716d99c471555ca33fe684dd.mesh", "res://.godot/imported/Corner_ExteriorWide_Wood.obj-b9c907ea716d99c471555ca33fe684dd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

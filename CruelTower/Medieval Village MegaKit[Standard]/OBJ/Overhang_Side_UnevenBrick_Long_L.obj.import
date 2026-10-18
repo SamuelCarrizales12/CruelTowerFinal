@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://jyllkg22w82p"
+path="res://.godot/imported/Overhang_Side_UnevenBrick_Long_L.obj-c5bf359d68baf6401bbe4b3150e8feca.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Overhang_Side_UnevenBrick_Long_L.obj-c5bf359d68baf6401bbe4b3150e8feca.mesh"]
+
+source_file="res://Medieval Village MegaKit[Standard]/OBJ/Overhang_Side_UnevenBrick_Long_L.obj"
+dest_files=["res://.godot/imported/Overhang_Side_UnevenBrick_Long_L.obj-c5bf359d68baf6401bbe4b3150e8feca.mesh", "res://.godot/imported/Overhang_Side_UnevenBrick_Long_L.obj-c5bf359d68baf6401bbe4b3150e8feca.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

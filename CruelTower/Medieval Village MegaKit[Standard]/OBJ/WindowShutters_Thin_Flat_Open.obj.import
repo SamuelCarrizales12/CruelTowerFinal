@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://6c6q6c7d3typ"
+path="res://.godot/imported/WindowShutters_Thin_Flat_Open.obj-f206341136f6d66a60a822c4da509001.mesh"
+
+[deps]
+
+files=["res://.godot/imported/WindowShutters_Thin_Flat_Open.obj-f206341136f6d66a60a822c4da509001.mesh"]
+
+source_file="res://Medieval Village MegaKit[Standard]/OBJ/WindowShutters_Thin_Flat_Open.obj"
+dest_files=["res://.godot/imported/WindowShutters_Thin_Flat_Open.obj-f206341136f6d66a60a822c4da509001.mesh", "res://.godot/imported/WindowShutters_Thin_Flat_Open.obj-f206341136f6d66a60a822c4da509001.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

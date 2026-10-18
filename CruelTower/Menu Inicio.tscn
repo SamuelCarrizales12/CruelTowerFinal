@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://3v2eg03buwwq"]
+
+[ext_resource type="Script" uid="uid://dav2i2e6nmuim" path="res://BotonesMenu.gd" id="1_34bhl"]
+[ext_resource type="Texture2D" uid="uid://pga07rv3qio" path="res://Iconos/Boton NP.png" id="1_jg08q"]
+[ext_resource type="Texture2D" uid="uid://yrbxhudfa0cj" path="res://Iconos/Botones presionados/Boton NPP.png" id="2_34bhl"]
+[ext_resource type="Texture2D" uid="uid://b2m635kbjsbc1" path="res://Iconos/Boton CP.png" id="2_u506t"]
+[ext_resource type="Texture2D" uid="uid://dex883wwjy5nl" path="res://Iconos/Boton C.png" id="3_q8rjw"]
+[ext_resource type="Texture2D" uid="uid://vr0ogyg7hh82" path="res://Iconos/Boton Salir.png" id="4_b00gg"]
+[ext_resource type="Texture2D" uid="uid://cyqexyq1lrium" path="res://Iconos/Botones presionados/Boton ConP.png" id="5_mgg7f"]
+[ext_resource type="Texture2D" uid="uid://b6fwbx2hafcv3" path="res://Iconos/Botones presionados/Boton CPP.png" id="5_pm57y"]
+[ext_resource type="Texture2D" uid="uid://bkc1tp7yx3kqe" path="res://Iconos/Botones presionados/Boton SalirP.png" id="9_cpi47"]
+
+[node name="Botones" type="Control" unique_id=1654329437]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_34bhl")
+metadata/_edit_lock_ = true
+
+[node name="BS" type="TextureButton" parent="." unique_id=1195471877]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34722227
+anchor_top = 0.37037036
+anchor_right = 0.6266105
+anchor_bottom = 0.50617284
+offset_left = 17.337738
+offset_right = -4.8865967
+offset_bottom = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.072445, 1)
+pivot_offset = Vector2(239.32321, 172)
+texture_normal = ExtResource("1_jg08q")
+texture_pressed = ExtResource("2_34bhl")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="BS2" type="TextureButton" parent="." unique_id=1842466001]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34722224
+anchor_top = 0.5185185
+anchor_right = 0.6266105
+anchor_bottom = 0.654321
+offset_left = 17.337738
+offset_right = -4.8865967
+offset_bottom = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.072445, 1)
+pivot_offset = Vector2(239.32321, 172)
+texture_normal = ExtResource("2_u506t")
+texture_pressed = ExtResource("5_pm57y")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="BS3" type="TextureButton" parent="." unique_id=304520188]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34722227
+anchor_top = 0.6666667
+anchor_right = 0.6266105
+anchor_bottom = 0.80246925
+offset_left = 17.337738
+offset_right = -4.8865967
+offset_bottom = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.072445, 1)
+pivot_offset = Vector2(239.32321, 172)
+texture_normal = ExtResource("3_q8rjw")
+texture_pressed = ExtResource("5_mgg7f")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="BS4" type="TextureButton" parent="." unique_id=1351255054]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34722224
+anchor_top = 0.8148148
+anchor_right = 0.6266105
+anchor_bottom = 0.9506174
+offset_left = 17.337738
+offset_right = -4.8865967
+offset_bottom = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.072445, 1)
+pivot_offset = Vector2(239.32321, 172)
+texture_normal = ExtResource("4_b00gg")
+texture_pressed = ExtResource("9_cpi47")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
