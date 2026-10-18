@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pga07rv3qio"
-path="res://.godot/imported/Boton NP.png-2684f345cb5e7dc9424a249a80671d7e.ctex"
+uid="uid://vr0ogyg7hh82"
+path="res://.godot/imported/Boton Salir.png-394956caf7b90fd029c0b5e3df6a5a6c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Iconos/Boton NP.png"
-dest_files=["res://.godot/imported/Boton NP.png-2684f345cb5e7dc9424a249a80671d7e.ctex"]
+source_file="res://Iconos/BotonesInicio/Boton Salir.png"
+dest_files=["res://.godot/imported/Boton Salir.png-394956caf7b90fd029c0b5e3df6a5a6c.ctex"]
 
 [params]
 

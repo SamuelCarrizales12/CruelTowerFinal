@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bwl233hilqxww"]
+
+[ext_resource type="Texture2D" uid="uid://dkpp4bmd7sjeu" path="res://Iconos/SaveLoadBotones/pngwing.com (1).png" id="1_ope2g"]
+[ext_resource type="Texture2D" uid="uid://cevk7b3nwm5el" path="res://Iconos/SaveLoadBotones/SSC.png" id="2_tcty5"]
+
+[node name="Control" type="Control" unique_id=42811270]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pngwing_com(1)" type="Sprite2D" parent="." unique_id=47663980]
+position = Vector2(574, 323.25003)
+scale = Vector2(1.156, 1.1536413)
+texture = ExtResource("1_ope2g")
+
+[node name="Ssc" type="Sprite2D" parent="." unique_id=1272584866]
+position = Vector2(223.50003, 306.4375)
+scale = Vector2(0.61500007, 0.71451175)
+texture = ExtResource("2_tcty5")
+
+[node name="Ssc2" type="Sprite2D" parent="." unique_id=1151893609]
+position = Vector2(888, 304)
+scale = Vector2(0.61500007, 0.71451175)
+texture = ExtResource("2_tcty5")
+
+[node name="Ssc3" type="Sprite2D" parent="." unique_id=99894839]
+position = Vector2(560, 304)
+scale = Vector2(0.61500007, 0.71451175)
+texture = ExtResource("2_tcty5")

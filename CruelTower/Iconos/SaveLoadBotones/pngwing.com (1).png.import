@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dex883wwjy5nl"
-path="res://.godot/imported/Boton C.png-77803dbfb64066b9856826395ed43f56.ctex"
+uid="uid://dkpp4bmd7sjeu"
+path="res://.godot/imported/pngwing.com (1).png-a56997951ba0e34038d9c95454a6f131.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Iconos/Boton C.png"
-dest_files=["res://.godot/imported/Boton C.png-77803dbfb64066b9856826395ed43f56.ctex"]
+source_file="res://Iconos/SaveLoadBotones/pngwing.com (1).png"
+dest_files=["res://.godot/imported/pngwing.com (1).png-a56997951ba0e34038d9c95454a6f131.ctex"]
 
 [params]
 
