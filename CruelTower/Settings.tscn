@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cmliqirei7qnq" path="res://settings.gd" id="1_bvb5x"]
 [ext_resource type="Texture2D" uid="uid://cj46yahwnwyq2" path="res://Iconos/SaveLoadBotones/pngwing.com (4).png" id="2_2fv1l"]
+[ext_resource type="Texture2D" uid="uid://dfdm5d0xgx8s0" path="res://Settings.png" id="2_mx4kw"]
 
 [node name="Settings" type="Control" unique_id=1556132988]
 layout_mode = 3
@@ -11,24 +12,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bvb5x")
+metadata/_edit_lock_ = true
+
+[node name="Settings" type="Sprite2D" parent="." unique_id=1224549674]
+position = Vector2(648.00006, 272)
+scale = Vector2(0.74, 0.7361407)
+texture = ExtResource("2_mx4kw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=904896619]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.39400002
-anchor_top = 0.31100002
-anchor_right = 0.63100004
-anchor_bottom = 0.67800003
-offset_left = -0.32003784
-offset_top = 0.07998657
-offset_right = 0.3199463
-offset_bottom = -0.16003418
+anchor_left = 0.462
+anchor_top = 0.45600003
+anchor_right = 0.58100003
+anchor_bottom = 0.62200004
+offset_left = -174.0
+offset_top = -96.32001
+offset_right = 136.31995
+offset_bottom = -31.840027
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 accessibility_region = true
 
 [node name="LabelVolume" type="Label" parent="VBoxContainer" unique_id=2003120282]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Volume"
 
 [node name="Volume" type="HSlider" parent="VBoxContainer" unique_id=931153169]
@@ -36,10 +46,8 @@ layout_mode = 2
 
 [node name="LabelVolumen" type="Label" parent="VBoxContainer" unique_id=1050629803]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Mute"
-
-[node name="Mute" type="CheckBox" parent="VBoxContainer" unique_id=2137076899]
-layout_mode = 2
 
 [node name="LabelVolumen2" type="Label" parent="VBoxContainer" unique_id=1617876343]
 layout_mode = 2
@@ -56,14 +64,13 @@ popup/item_1/id = 1
 popup/item_2/text = "1280x720"
 popup/item_2/id = 2
 
-[node name="Return" type="Sprite2D" parent="VBoxContainer" unique_id=700782379]
-position = Vector2(648, -184)
-rotation = 0.0020970479
-scale = Vector2(0.5528324, 0.362548)
+[node name="Return" type="Sprite2D" parent="." unique_id=700782379]
+position = Vector2(808, 184)
+rotation = 0.0020970476
+scale = Vector2(0.31560403, 0.23787555)
 texture = ExtResource("2_2fv1l")
-metadata/_edit_lock_ = true
 
-[node name="Return" type="TextureButton" parent="VBoxContainer/Return" unique_id=1681184196]
+[node name="Return" type="TextureButton" parent="Return" unique_id=1681184196]
 anchors_preset = -1
 anchor_right = 0.78800005
 anchor_bottom = 0.9620001
@@ -71,9 +78,17 @@ offset_left = -192.92029
 offset_top = -86.61194
 offset_right = -197.83621
 offset_bottom = -88.51224
-metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Mute" type="CheckBox" parent="." unique_id=2137076899]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 288.0
+offset_right = 736.0
+offset_bottom = 312.0
+size_flags_horizontal = 4
 
 [connection signal="value_changed" from="VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
-[connection signal="toggled" from="VBoxContainer/Mute" to="." method="_on_mute_toggled"]
 [connection signal="item_selected" from="VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
-[connection signal="pressed" from="VBoxContainer/Return/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="Return/Return" to="." method="_on_return_pressed"]
+[connection signal="toggled" from="Mute" to="." method="_on_mute_toggled"]

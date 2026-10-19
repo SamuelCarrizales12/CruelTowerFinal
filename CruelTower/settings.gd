@@ -5,7 +5,7 @@ const CONFIG_PATH: String = "user://settings.cfg"
 
 # Referencias a los nodos de tu escena
 @onready var volume_slider: HSlider = $VBoxContainer/Volume
-@onready var mute_checkbox: CheckBox = $VBoxContainer/Mute
+@onready var mute_checkbox: CheckBox = $Mute
 @onready var resolutions_option: OptionButton = $VBoxContainer/Resolutions
 
 func _ready() -> void:
