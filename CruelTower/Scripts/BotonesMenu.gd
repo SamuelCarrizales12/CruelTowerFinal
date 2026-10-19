@@ -28,8 +28,7 @@ func _on_continuar_pressed() -> void:
 # 3. Botón: Configuración
 func _on_configuracion_pressed() -> void:
 	print("Abriendo menú de configuración...")
-	# Aquí puedes abrir un panel de opciones/ajustes
-	# get_tree().change_scene_to_file("res://MenuOpciones.tscn")
+	get_tree().change_scene_to_file("res://Settings.tscn")
 
 # 4. Botón: Salir
 func _on_salir_pressed() -> void:

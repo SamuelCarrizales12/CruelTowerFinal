@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3v2eg03buwwq"]
 
-[ext_resource type="Script" uid="uid://dav2i2e6nmuim" path="res://BotonesMenu.gd" id="1_34bhl"]
+[ext_resource type="Script" uid="uid://dav2i2e6nmuim" path="res://Scripts/BotonesMenu.gd" id="1_34bhl"]
 [ext_resource type="Texture2D" uid="uid://pga07rv3qio" path="res://Iconos/BotonesInicio/Boton NP.png" id="1_jg08q"]
 [ext_resource type="Texture2D" uid="uid://yrbxhudfa0cj" path="res://Iconos/Botones presionados/Boton NPP.png" id="2_34bhl"]
 [ext_resource type="Texture2D" uid="uid://b2m635kbjsbc1" path="res://Iconos/BotonesInicio/Boton CP.png" id="2_u506t"]
