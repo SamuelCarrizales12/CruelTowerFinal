@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cyqexyq1lrium" path="res://Iconos/Botones presionados/Boton ConP.png" id="5_mgg7f"]
 [ext_resource type="Texture2D" uid="uid://b6fwbx2hafcv3" path="res://Iconos/Botones presionados/Boton CPP.png" id="5_pm57y"]
 [ext_resource type="Texture2D" uid="uid://bkc1tp7yx3kqe" path="res://Iconos/Botones presionados/Boton SalirP.png" id="9_cpi47"]
+[ext_resource type="AudioStream" uid="uid://dk5vuonmmjwug" path="res://Soundtrack/emmraan-fantasy-kingdom-261257.mp3" id="10_cpi47"]
 
 [node name="Botones" type="Control" unique_id=1654329437]
 layout_mode = 3
@@ -18,7 +19,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_34bhl")
-metadata/_edit_lock_ = true
 
 [node name="BS" type="TextureButton" parent="." unique_id=1195471877]
 layout_mode = 1
@@ -99,3 +99,8 @@ texture_pressed = ExtResource("9_cpi47")
 ignore_texture_size = true
 stretch_mode = 0
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer2D" parent="." unique_id=535648756]
+stream = ExtResource("10_cpi47")
+autoplay = true
+parameters/looping = true

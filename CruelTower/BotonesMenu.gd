@@ -16,14 +16,15 @@ func _ready() -> void:
 # 1. Botón: Nueva Partida
 func _on_nueva_partida_pressed() -> void:
 	print("Iniciando nueva partida...")
-	# Cambia "res://Nivel1.tscn" por la ruta de tu primera escena o nivel
-	# get_tree().change_scene_to_file("res://Nivel1.tscn")
+	# Cambia a la escena del menú de slots de guardado
+	get_tree().change_scene_to_file("res://SPG.tscn")
+
 
 # 2. Botón: Continuar Partida
 func _on_continuar_pressed() -> void:
 	print("Cargando partida guardada...")
 	# Aquí colocas la lógica para cargar la partida guardada
-
+	get_tree().change_scene_to_file("res://SPG.tscn")
 # 3. Botón: Configuración
 func _on_configuracion_pressed() -> void:
 	print("Abriendo menú de configuración...")
