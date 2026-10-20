@@ -17,6 +17,15 @@
 [ext_resource type="PackedScene" uid="uid://tb1k3d6on3xy" path="res://Medieval Village MegaKit[Standard]/glTF/Prop_Vine2.gltf" id="15_wieln"]
 [ext_resource type="Texture2D" uid="uid://bh88wurkimd1y" path="res://Medieval Village MegaKit[Standard]/glTF/T_MetalOrnaments_BaseColor.png" id="16_r8t11"]
 [ext_resource type="Texture2D" uid="uid://dol1mmeryw8av" path="res://Medieval Village MegaKit[Standard]/glTF/T_MetalOrnaments_Roughness.png" id="17_k88oy"]
+[ext_resource type="PackedScene" uid="uid://ipaih4c0i0d2" path="res://Medieval Village MegaKit[Standard]/glTF/Prop_ExteriorBorder_Straight1.gltf" id="18_g62k1"]
+[ext_resource type="PackedScene" uid="uid://bgmskn2615jyy" path="res://Medieval Village MegaKit[Standard]/glTF/Wall_Plaster_Straight.gltf" id="19_1c3tf"]
+[ext_resource type="PackedScene" uid="uid://cd7fk3v2t4um3" path="res://Medieval Village MegaKit[Standard]/glTF/Wall_Plaster_Window_Wide_Flat2.gltf" id="20_tyl5q"]
+[ext_resource type="PackedScene" uid="uid://lglevwmr0mmg" path="res://Medieval Village MegaKit[Standard]/glTF/Window_Wide_Flat1.gltf" id="21_qpsfk"]
+[ext_resource type="PackedScene" uid="uid://cnqdyrhs1emt4" path="res://Medieval Village MegaKit[Standard]/glTF/Wall_Plaster_WoodGrid.gltf" id="22_i4hmk"]
+[ext_resource type="PackedScene" uid="uid://c4qguhgev8icl" path="res://Medieval Village MegaKit[Standard]/glTF/Wall_Plaster_Straight_L.gltf" id="23_wieln"]
+[ext_resource type="PackedScene" uid="uid://bj4jpgam2hc3x" path="res://Medieval Village MegaKit[Standard]/glTF/Prop_ExteriorBorder_Corner.gltf" id="24_r8t11"]
+[ext_resource type="PackedScene" uid="uid://cgbrfre76bopf" path="res://Medieval Village MegaKit[Standard]/glTF/Corner_Exterior_Wood.gltf" id="25_k88oy"]
+[ext_resource type="PackedScene" uid="uid://u6wgwawrw4mo" path="res://Medieval Village MegaKit[Standard]/glTF/Floor_Brick.gltf" id="26_lqvj1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d81ip"]
 resource_name = "MI_WoodTrim"
@@ -1948,3 +1957,420 @@ mesh = SubResource("ArrayMesh_x3bgt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prop_MetalFence_Ornament2/Prop_MetalFence_Simple2/Prop_MetalFence_Simple2/Prop_MetalFence_Simple/StaticBody3D" unique_id=2091501094]
 shape = SubResource("ConcavePolygonShape3D_dxrmt")
+
+[node name="Sin colisiones" type="Node3D" parent="." unique_id=1748386846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight12" parent="Sin colisiones" unique_id=18250399 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight12" unique_id=1629041995 instance=ExtResource("19_1c3tf")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight12/Wall_Plaster_Straight2" unique_id=170992314 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight12/Wall_Plaster_Straight2/Wall_Plaster_Straight2" unique_id=1768842656 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight12/Wall_Plaster_Straight2/Wall_Plaster_Straight2" unique_id=2111570606 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight12/Wall_Plaster_Straight2/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=850880151 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight13" parent="Sin colisiones" unique_id=1683755945 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="Wall_Plaster_Window_Wide_Flat22" parent="Sin colisiones/Prop_ExteriorBorder_Straight13" unique_id=161527845 instance=ExtResource("20_tyl5q")]
+
+[node name="Window_Wide_Flat12" parent="Sin colisiones/Prop_ExteriorBorder_Straight13/Wall_Plaster_Window_Wide_Flat22" unique_id=27359623 instance=ExtResource("21_qpsfk")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight13" unique_id=992604709 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight13/Wall_Plaster_Straight2" unique_id=388030855 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight13/Wall_Plaster_Straight2" unique_id=1241512272 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight13/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=942661196 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight14" parent="Sin colisiones" unique_id=1921912290 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight14" unique_id=2114579744 instance=ExtResource("19_1c3tf")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight14/Wall_Plaster_Straight2" unique_id=1142534487 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight14/Wall_Plaster_Straight2/Wall_Plaster_Straight2" unique_id=1330510359 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight14/Wall_Plaster_Straight2/Wall_Plaster_Straight2" unique_id=1177981536 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight14/Wall_Plaster_Straight2/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=1722751191 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight15" parent="Sin colisiones" unique_id=191464928 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+
+[node name="Wall_Plaster_WoodGrid3" parent="Sin colisiones/Prop_ExteriorBorder_Straight15" unique_id=486040031 instance=ExtResource("22_i4hmk")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Wall_Plaster_WoodGrid3" unique_id=422447221 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Wall_Plaster_WoodGrid3/Wall_Plaster_Straight2" unique_id=1698150654 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Wall_Plaster_WoodGrid3/Wall_Plaster_Straight2" unique_id=1818697317 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Wall_Plaster_WoodGrid3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=1049488364 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight15" parent="Sin colisiones/Prop_ExteriorBorder_Straight15" unique_id=1595308371 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Wall_Plaster_WoodGrid3" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Prop_ExteriorBorder_Straight15" unique_id=1268511703 instance=ExtResource("22_i4hmk")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Prop_ExteriorBorder_Straight15/Wall_Plaster_WoodGrid3" unique_id=290797983 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Prop_ExteriorBorder_Straight15/Wall_Plaster_WoodGrid3/Wall_Plaster_Straight2" unique_id=1551184263 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Prop_ExteriorBorder_Straight15/Wall_Plaster_WoodGrid3/Wall_Plaster_Straight2" unique_id=156927253 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight15/Prop_ExteriorBorder_Straight15/Wall_Plaster_WoodGrid3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=319475189 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight17" parent="Sin colisiones" unique_id=558783988 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight17" unique_id=1986352517 instance=ExtResource("19_1c3tf")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight17/Wall_Plaster_Straight2" unique_id=921486995 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight17/Wall_Plaster_Straight2/Wall_Plaster_Straight2" unique_id=1535781443 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight17/Wall_Plaster_Straight2/Wall_Plaster_Straight2" unique_id=2096585463 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight17/Wall_Plaster_Straight2/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=643007134 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight18" parent="Sin colisiones" unique_id=978871112 instance=ExtResource("18_g62k1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, 6)
+
+[node name="Wall_Plaster_Straight_L2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18" unique_id=1169656935 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2" unique_id=1867624831 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2" unique_id=1647163746 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2" unique_id=736759030 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=234863471 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight18" parent="Sin colisiones/Prop_ExteriorBorder_Straight18" unique_id=776594203 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Wall_Plaster_Straight_L2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18" unique_id=1183008182 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2" unique_id=1621671262 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2" unique_id=1883506250 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2" unique_id=2109675865 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=1674682050 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight18" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18" unique_id=1568970978 instance=ExtResource("18_g62k1")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, -1)
+
+[node name="Wall_Plaster_Straight_L2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18" unique_id=1951823324 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2" unique_id=2071478527 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2" unique_id=1857025476 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2" unique_id=115081825 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Prop_ExteriorBorder_Straight18/Wall_Plaster_Straight_L2/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=375072331 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight19" parent="Sin colisiones" unique_id=607077479 instance=ExtResource("18_g62k1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3, 0, 6)
+
+[node name="Wall_Plaster_Straight_L3" parent="Sin colisiones/Prop_ExteriorBorder_Straight19" unique_id=904426313 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight19/Wall_Plaster_Straight_L3" unique_id=480739353 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight19/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1241120424 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight19/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1848992813 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight19/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=1068447639 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Corner2" parent="Sin colisiones" unique_id=753462728 instance=ExtResource("24_r8t11")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, 6)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Prop_ExteriorBorder_Corner2" unique_id=1642291647 instance=ExtResource("25_k88oy")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Prop_ExteriorBorder_Corner2/Corner_Exterior_Wood2" unique_id=1862586145 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Prop_ExteriorBorder_Corner2/Corner_Exterior_Wood2/Corner_Exterior_Wood2" unique_id=396564051 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Prop_ExteriorBorder_Corner2/Corner_Exterior_Wood2/Corner_Exterior_Wood2/Corner_Exterior_Wood2" unique_id=316064883 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Prop_ExteriorBorder_Corner2/Corner_Exterior_Wood2/Corner_Exterior_Wood2/Corner_Exterior_Wood2/Corner_Exterior_Wood2" unique_id=226021323 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones" unique_id=1420367120 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Corner_Exterior_Wood2" unique_id=86550802 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Corner_Exterior_Wood2/Corner_Exterior_Wood2" unique_id=1315619723 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Corner_Exterior_Wood2/Corner_Exterior_Wood2/Corner_Exterior_Wood2" unique_id=244159669 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Corner_Exterior_Wood2" parent="Sin colisiones/Corner_Exterior_Wood2/Corner_Exterior_Wood2/Corner_Exterior_Wood2/Corner_Exterior_Wood2" unique_id=1188769304 instance=ExtResource("25_k88oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Prop_ExteriorBorder_Straight20" parent="Sin colisiones" unique_id=1067225885 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 12, 0, 1)
+
+[node name="Wall_Plaster_Straight_L3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20" unique_id=1839916011 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3" unique_id=1259459393 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1132075403 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1668776713 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=2120123594 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight20" parent="Sin colisiones/Prop_ExteriorBorder_Straight20" unique_id=666214839 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Wall_Plaster_Straight_L3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=640561174 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3" unique_id=1405189899 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1010419642 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1601062050 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=1086823408 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight20" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=791110515 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Wall_Plaster_Straight_L3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=31831188 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3" unique_id=1497559613 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1000539219 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=536360388 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=1875599536 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight20" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=899672776 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Wall_Plaster_Straight_L3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=714913210 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3" unique_id=572686053 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=430961997 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=2071213841 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=1681281120 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight20" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=723703077 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Wall_Plaster_Straight_L3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=1506023074 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3" unique_id=777963214 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1923790098 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=932213797 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=38052445 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight20" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=1170401108 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Wall_Plaster_Straight_L3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=1162877830 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3" unique_id=2067700731 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=414064651 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=324866363 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=318080194 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Prop_ExteriorBorder_Straight20" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=373150558 instance=ExtResource("18_g62k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Wall_Plaster_Straight_L3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20" unique_id=1170004661 instance=ExtResource("23_wieln")]
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3" unique_id=561570860 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=1335705465 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Wall_Plaster_Straight3" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2" unique_id=260935775 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Wall_Plaster_Straight2" parent="Sin colisiones/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Prop_ExteriorBorder_Straight20/Wall_Plaster_Straight_L3/Wall_Plaster_Straight2/Wall_Plaster_Straight3" unique_id=1204262684 instance=ExtResource("19_1c3tf")]
+transform = Transform3D(-0.9999999, -8.7422755e-08, 0, 8.7422755e-08, -0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Floor_Brick3" parent="Sin colisiones" unique_id=1964382606 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3" unique_id=652607893 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3" unique_id=954495601 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor_Brick5" parent="Sin colisiones/Floor_Brick3" unique_id=1994975250 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick5" unique_id=1545818985 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3/Floor_Brick5" unique_id=1734917837 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor_Brick6" parent="Sin colisiones/Floor_Brick3" unique_id=992356775 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6" unique_id=2023999448 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3/Floor_Brick6" unique_id=1944414753 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor_Brick5" parent="Sin colisiones/Floor_Brick3/Floor_Brick6" unique_id=1833448109 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick5" unique_id=996293262 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick5" unique_id=880138749 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick5/Floor_Brick4" unique_id=378226453 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick6" parent="Sin colisiones/Floor_Brick3/Floor_Brick6" unique_id=1943809471 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6" unique_id=353875322 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6" unique_id=33943857 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick4" unique_id=1644625229 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick5" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6" unique_id=366332374 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5" unique_id=1363341117 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5" unique_id=709947914 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick4" unique_id=1034974920 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick6" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5" unique_id=1985634647 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick6" unique_id=1382190051 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick6" unique_id=933048855 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor_Brick5" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick6" unique_id=1288740527 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick6/Floor_Brick5" unique_id=822653070 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick6/Floor_Brick5" unique_id=43210276 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor_Brick5" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick6/Floor_Brick5" unique_id=533840499 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Floor_Brick3" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick6/Floor_Brick5/Floor_Brick5" unique_id=763070109 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
+
+[node name="Floor_Brick4" parent="Sin colisiones/Floor_Brick3/Floor_Brick6/Floor_Brick6/Floor_Brick5/Floor_Brick6/Floor_Brick5/Floor_Brick5" unique_id=1865151592 instance=ExtResource("26_lqvj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
