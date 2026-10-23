@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://jior2nldywqg"]
+
+[ext_resource type="Script" uid="uid://ctaghshaqkag5" path="res://Scripts/character.gd" id="1_oolk3"]
+[ext_resource type="Texture2D" uid="uid://jv8thcbtqm3b" path="res://Recursos/charact.png" id="2_7ig0a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ms6xa"]
+radius = 0.22851563
+height = 2.2105923
+
+[node name="Node3D" type="Node3D" unique_id=1787889576]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1198284294]
+script = ExtResource("1_oolk3")
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D" unique_id=1524479091]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, -1, 0)
+billboard = 2
+texture = ExtResource("2_7ig0a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1317600188]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.1104856, -2.363832, 0)
+shape = SubResource("CapsuleShape3D_ms6xa")
+
+[node name="CameraPivot" type="Node3D" parent="CharacterBody3D" unique_id=1435040215]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/CameraPivot" unique_id=1249475222]
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraPivot/SpringArm3D" unique_id=360977280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.675, 2, 7)
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/CameraPivot/SpringArm3D/Camera3D" unique_id=482603434]
+target_position = Vector3(0, 0, -50)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody3D" unique_id=1387791216]
+
+[node name="ColorRect" type="ColorRect" parent="CharacterBody3D/CanvasLayer" unique_id=96692821]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
