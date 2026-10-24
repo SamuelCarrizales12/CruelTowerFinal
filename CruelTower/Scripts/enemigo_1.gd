@@ -3,7 +3,6 @@ extends CharacterBody3D
 @onready var sprite = $Sprite3D
 
 # --- VARIABLES DE MANADA ---
-# Aparecerá en el Inspector. Puedes ponerle "manada_1", "manada_2", etc., a cada copia en tu mapa.
 @export var nombre_manada: String = "manada_1"
 
 # --- VARIABLES DE LEVITACIÓN ---
@@ -15,7 +14,21 @@ const VELOCIDAD_FLOTE := 3.0
 # --- VARIABLES DE PERSECUCIÓN ---
 var persiguiendo := false
 var objetivo: Node3D = null
-const SPEED = 1.0
+const SPEED = 1.5
+
+var vida := 100
+var aturdido := false
+
+var muerto := false
+@export var tex_explosion1: Texture2D
+@export var tex_explosion2: Texture2D
+@export var tex_explosion3: Texture2D
+@export var tex_explosion4: Texture2D
+@export var tex_explosion5: Texture2D
+
+@export var textura_dano: Texture2D # La imagen roja o de daño
+@export var textura_dano2: Texture2D
+@onready var textura_normal = sprite.texture
 
 func _ready():
 	# El enemigo se une automáticamente a su mini-manada al aparecer en el mundo
@@ -32,25 +45,25 @@ func alertar(quien_disparo: Node3D):
 	get_tree().call_group(nombre_manada, "alertar", quien_disparo)
 
 func _physics_process(delta: float) -> void:
-	# Gravedad estándar
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Lógica de persecución con NavigationAgent3D
-	if persiguiendo and objetivo != null:
-		# Obtenemos la dirección hacia el jugador
-		var direccion = global_position.direction_to(objetivo.global_position)
-		
-		# Anulamos el eje Y para que el enemigo no intente volar hacia tu cabeza o hundirse
-		direccion.y = 0 
-		direccion = direccion.normalized()
-		
-		velocity.x = direccion.x * SPEED
-		velocity.z = direccion.z * SPEED
+	if not aturdido:
+		if persiguiendo and is_instance_valid(objetivo):
+			var direccion = global_position.direction_to(objetivo.global_position)
+			direccion.y = 0 
+			direccion = direccion.normalized()
+			
+			velocity.x = direccion.x * SPEED
+			velocity.z = direccion.z * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
+			
 	else:
-		# Si no persigue, se queda quieto
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = lerp(velocity.x, 0.0, 5.0 * delta)
+		velocity.z = lerp(velocity.z, 0.0, 5.0 * delta)
+
 	move_and_slide()
 
 # --- LEVITACIÓN VISUAL ---
@@ -58,3 +71,53 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	tiempo += delta
 	sprite.position.y = pos_y_inicial + sin(tiempo * VELOCIDAD_FLOTE) * AMPLITUD
+
+func recibir_dano(cantidad: int, direccion_impacto: Vector3, atacante: Node3D):
+	# Si ya está muerto, ignoramos más disparos
+	if muerto:
+		return
+		
+	vida -= cantidad
+	alertar(atacante)
+	
+	if vida <= 0:
+		morir() # Llamamos a la animación en lugar de borrarlo de golpe
+		return
+		
+	if vida <= 35:
+		textura_normal = textura_dano2
+	elif vida <= 70:
+		textura_normal = textura_dano
+		
+	sprite.texture = textura_normal
+		
+	aturdido = true
+	
+	direccion_impacto.y = 0.5
+	velocity = direccion_impacto * 12.0
+	
+	await get_tree().create_timer(0.3).timeout
+
+	aturdido = false
+
+func morir():
+	muerto = true
+	aturdido = true # Congelamos su movimiento para que no siga resbalando
+	
+	# Apagamos la colisión de forma segura
+	$CollisionShape3D.set_deferred("disabled", true)
+	
+	# --- ANIMACIÓN DE EXPLOSIÓN ---
+	sprite.texture = tex_explosion1
+	await get_tree().create_timer(0.05).timeout
+	sprite.texture = tex_explosion2
+	await get_tree().create_timer(0.05).timeout
+	sprite.texture = tex_explosion3
+	await get_tree().create_timer(0.05).timeout
+	sprite.texture = tex_explosion4
+	await get_tree().create_timer(0.05).timeout
+	sprite.texture = tex_explosion5
+	await get_tree().create_timer(0.05).timeout
+	
+	# Una vez terminada la animación, eliminamos el nodo
+	queue_free()

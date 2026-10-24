@@ -15,6 +15,8 @@ const FOV_APUNTADO = 40.0
 var esta_disparando = false
 var tiempo_paso = 0.0
 
+var tiene_pistola = false
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -49,8 +51,17 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, velocidad_actual)
 			velocity.z = move_toward(velocity.z, 0, velocidad_actual)
 	
-		if Input.is_action_just_pressed("disparar"):
+		if Input.is_action_just_pressed("disparar") and tiene_pistola:
 			disparar()
+			
+		if Input.is_action_just_pressed("interactuar"):
+			raycast.force_raycast_update()
+			if raycast.is_colliding():
+				var objeto_mirado = raycast.get_collider()
+				
+				# Si el objeto tiene la función 'recoger', se ejecuta
+				if objeto_mirado.has_method("recoger"):
+					objeto_mirado.recoger(self)
 			
 		if direction and is_on_floor() and not esta_disparando:
 			tiempo_paso += delta * velocity.length() * 1.5
@@ -80,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		
 	if raycast.is_colliding():
 		var objetivo_mirado = raycast.get_collider()
-		if objetivo_mirado.has_method("alertar"):
+		if is_instance_valid(objetivo_mirado) and objetivo_mirado.has_method("alertar"):
 			mirilla.color = Color(0.714, 0.0, 0.157, 1.0) # Rojo
 		else:
 			mirilla.color = Color(1, 1, 1) # Blanco (si mira a una pared)
@@ -98,14 +109,16 @@ func disparar():
 	
 	if raycast.is_colliding():
 		var objetivo = raycast.get_collider() # Obtenemos el nodo golpeado
-		if objetivo.has_method("alertar"):
-			objetivo.alertar(self)
+		
+		if objetivo.has_method("recibir_dano"):
+			var direccion_tiro = global_position.direction_to(objetivo.global_position)
+			objetivo.recibir_dano(35, direccion_tiro, self)
 		
 	var tween = create_tween()
 	var posicion_original_z = 7.0
 	
-	tween.tween_property(camara, "position:z", 0.3, 0.0)
-	tween.tween_property(camara, "position:z", posicion_original_z, 0.2)
+	tween.tween_property(camara, "position:z", 0.5, 0.0)
+	tween.tween_property(camara, "position:z", posicion_original_z, 0.8)
 	tween.tween_callback(func(): esta_disparando = false)
 		# Aquí podrías llamar a una función del enemigo para restarle vida. Ejemplo:
 		# if objetivo.has_method("recibir_dano"):

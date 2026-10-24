@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bdovv4htpce1l"]
+
+[ext_resource type="Script" uid="uid://covb8sjq717bj" path="res://Scripts/pistola_recogible.gd" id="1_4gtqk"]
+
+[node name="PistolaRecogible" type="StaticBody3D" unique_id=1144396916]
+script = ExtResource("1_4gtqk")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=532278886]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1527628493]
