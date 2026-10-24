@@ -17,6 +17,12 @@ var tiempo_paso = 0.0
 
 var tiene_pistola = false
 @onready var texto_interaccion = $CanvasLayer/Label
+@onready var texto_municion = $CanvasLayer/TextoMunicion
+
+var municion_actual := 12
+var tamano_cargador := 12
+var municion_reserva := 36
+var recargando := false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -51,8 +57,11 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, velocidad_actual)
 			velocity.z = move_toward(velocity.z, 0, velocidad_actual)
 	
-		if Input.is_action_just_pressed("disparar") and tiene_pistola:
+		if Input.is_action_just_pressed("disparar") and tiene_pistola and not recargando:
 			disparar()
+		
+		if Input.is_action_just_pressed("recargar") and tiene_pistola and not recargando:
+			recargar()
 			
 		if Input.is_action_just_pressed("interactuar"):
 			raycast.force_raycast_update()
@@ -120,8 +129,18 @@ func _physics_process(delta: float) -> void:
 		texto_interaccion.visible = false
 		
 	move_and_slide()
+	if tiene_pistola:
+		texto_municion.visible = true
+		texto_municion.text = str(municion_actual) + " / " + str(municion_reserva)
+	else:
+		texto_municion.visible = false
 
 func disparar():
+	if municion_actual <= 0:
+		print("Cargador vacio")
+		return
+	municion_actual -= 1
+	
 	esta_disparando = true
 	var direccion_retroceso = pivot.transform.basis.z.normalized()
 	velocity.x = direccion_retroceso.x * 10.0
@@ -142,6 +161,24 @@ func disparar():
 	tween.tween_property(camara, "position:z", 0.5, 0.0)
 	tween.tween_property(camara, "position:z", posicion_original_z, 0.8)
 	tween.tween_callback(func(): esta_disparando = false)
-		# Aquí podrías llamar a una función del enemigo para restarle vida. Ejemplo:
-		# if objetivo.has_method("recibir_dano"):
-		#     objetivo.recibir_dano(10)
+
+func recargar():
+	if municion_actual == tamano_cargador or municion_reserva <= 0:
+		return
+	
+	recargando = true
+	print ("Recargando")
+	
+	await get_tree().create_timer(1.5).timeout
+	var balas_faltantes = tamano_cargador - municion_actual
+	
+	if municion_reserva >= balas_faltantes:
+		municion_reserva -= balas_faltantes
+		municion_actual += balas_faltantes
+	else:
+		municion_actual += municion_reserva
+		municion_reserva = 0
+		
+	recargando = false
+	print("Arma lista. Munición: ", municion_actual, "/", municion_reserva)
+	

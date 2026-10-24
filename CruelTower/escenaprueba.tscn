@@ -43,3 +43,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.34607, 0.7934792, -10.8909
 
 [node name="PistolaRecogible" parent="." unique_id=1144396916 instance=ExtResource("4_stini")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5457257, 1.2722185, -1.9714211)
+
+[node name="Enemigo2" parent="." unique_id=1539264657 instance=ExtResource("3_xf22r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -28)
+
+[node name="Enemigo3" parent="." unique_id=757058483 instance=ExtResource("3_xf22r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -29)
+
+[node name="Enemigo4" parent="." unique_id=2006361807 instance=ExtResource("3_xf22r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -28)
+
+[node name="Enemigo5" parent="." unique_id=1986549451 instance=ExtResource("3_xf22r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -30)
