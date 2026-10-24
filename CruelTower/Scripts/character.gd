@@ -24,6 +24,11 @@ var tamano_cargador := 12
 var municion_reserva := 36
 var recargando := false
 
+var salud_maxima := 100
+var salud_actual := 100
+
+var coleccionables_obtenidos := []
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -110,10 +115,10 @@ func _physics_process(delta: float) -> void:
 			# 2. Si miramos a un objeto interactuable
 			elif objetivo_mirado.has_method("recoger"):
 				var distancia = global_position.distance_to(objetivo_mirado.global_position)
-				if distancia <= 1.0:
+				if distancia <= 3.0:
 					mirilla.color = Color(1, 1, 1) 
 					texto_interaccion.visible = true
-					texto_interaccion.text = "Presiona [ E ] para recoger arma"
+					texto_interaccion.text = "Presiona [ E ] para interactuar"
 				else:
 					mirilla.color = Color(1,1,1)
 					texto_interaccion.visible = false
@@ -182,3 +187,16 @@ func recargar():
 	recargando = false
 	print("Arma lista. Munición: ", municion_actual, "/", municion_reserva)
 	
+func recibir_dano(cantidad: int):
+	salud_actual -= cantidad
+	if salud_actual <= 0:
+		print("¡ESTÁS MUERTO!")
+		
+func curar(cantidad: int):
+	salud_actual += cantidad
+	
+	# Evitamos que la vida pase de 100
+	if salud_actual > salud_maxima:
+		salud_actual = salud_maxima
+		
+	print("¡Curado! Salud: ", salud_actual)

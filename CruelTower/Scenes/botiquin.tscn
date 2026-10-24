@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dpovrp3x37vd5"]
+
+[ext_resource type="Script" uid="uid://8y2wwvkrmwq2" path="res://Scripts/botiquin.gd" id="1_ieeqc"]
+[ext_resource type="Texture2D" uid="uid://dba4aeublam6m" path="res://Recursos/explosion4.png" id="2_x75c5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ms6xa"]
+
+[node name="Botiquin" type="StaticBody3D" unique_id=1130389143]
+script = ExtResource("1_ieeqc")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=489706362]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 1
+texture = ExtResource("2_x75c5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1916099212]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_ms6xa")

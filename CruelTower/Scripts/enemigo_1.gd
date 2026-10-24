@@ -30,6 +30,8 @@ var muerto := false
 @export var textura_dano2: Texture2D
 @onready var textura_normal = sprite.texture
 
+var cooldown_ataque := 0.0
+
 func _ready():
 	# El enemigo se une automáticamente a su mini-manada al aparecer en el mundo
 	add_to_group(nombre_manada)
@@ -65,6 +67,21 @@ func _physics_process(delta: float) -> void:
 		velocity.z = lerp(velocity.z, 0.0, 5.0 * delta)
 
 	move_and_slide()
+	
+	# --- DAÑO POR CONTACTO AL JUGADOR ---
+	if not aturdido and not muerto and cooldown_ataque <= 0.0:
+		
+		# Revisamos todos los objetos con los que el enemigo está chocando físicamente
+		for i in get_slide_collision_count():
+			var colision = get_slide_collision(i)
+			var objeto_chocado = colision.get_collider()
+			
+			if is_instance_valid(objeto_chocado):
+				# Usamos has_method("curar") como truco para asegurarnos de que es el jugador
+				# y no otro enemigo u otra caja de madera
+				if objeto_chocado.has_method("curar"):
+					objeto_chocado.recibir_dano(15)
+					cooldown_ataque = 1.0 
 
 # --- LEVITACIÓN VISUAL ---
 # Es vital que esto esté en _process y afecte solo a sprite.position.y
