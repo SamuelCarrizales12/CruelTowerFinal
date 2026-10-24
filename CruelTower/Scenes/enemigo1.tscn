@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cvdqn5afy4b45"]
+
+[ext_resource type="Script" uid="uid://bylhh0tvobh2k" path="res://Scripts/enemigo_1.gd" id="1_c0ehi"]
+[ext_resource type="Texture2D" uid="uid://mtqpmo0f8e1c" path="res://Recursos/icon.png" id="2_7rc34"]
+[ext_resource type="Texture2D" uid="uid://dvm5so0eor44t" path="res://Recursos/explosion3.png" id="2_ntwxi"]
+[ext_resource type="Texture2D" uid="uid://bvgms75hcnub8" path="res://Recursos/explosion1.png" id="2_q172i"]
+[ext_resource type="Texture2D" uid="uid://0cnd8v46bqs1" path="res://Recursos/explosion2.png" id="3_eae43"]
+[ext_resource type="Texture2D" uid="uid://dba4aeublam6m" path="res://Recursos/explosion4.png" id="3_jplxd"]
+[ext_resource type="Texture2D" uid="uid://d3fp3v2b4bxp" path="res://Recursos/explosion5.png" id="4_6r2qo"]
+[ext_resource type="Texture2D" uid="uid://brpgnqarmi4q5" path="res://Recursos/explosion6.png" id="5_xxknp"]
+[ext_resource type="Texture2D" uid="uid://bgigx3bm5nca7" path="res://Recursos/explosion7.png" id="6_3wm0f"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ms6xa"]
+radius = 0.54117364
+
+[node name="Enemigo1" type="CharacterBody3D" unique_id=1881378344]
+script = ExtResource("1_c0ehi")
+tex_explosion1 = ExtResource("2_ntwxi")
+tex_explosion2 = ExtResource("3_jplxd")
+tex_explosion3 = ExtResource("4_6r2qo")
+tex_explosion4 = ExtResource("5_xxknp")
+tex_explosion5 = ExtResource("6_3wm0f")
+textura_dano = ExtResource("2_q172i")
+textura_dano2 = ExtResource("3_eae43")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2120905451]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+texture = ExtResource("2_7rc34")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=442259449]
+shape = SubResource("SphereShape3D_ms6xa")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1655480090]

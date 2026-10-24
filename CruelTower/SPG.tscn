@@ -622,3 +622,4 @@ stream = ExtResource("5_music")
 autoplay = true
 bus = &"Master"
 parameters/looping = true
+
