@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cv4yr0g2n0oq4" path="res://Scenes/Mapa1.tscn" id="1_ymplu"]
 [ext_resource type="PackedScene" uid="uid://jior2nldywqg" path="res://Scenes/Character.tscn" id="2_xf22r"]
 [ext_resource type="PackedScene" uid="uid://cvdqn5afy4b45" path="res://Scenes/enemigo1.tscn" id="3_xf22r"]
+[ext_resource type="PackedScene" uid="uid://bdovv4htpce1l" path="res://Scenes/pistola_recogible.tscn" id="4_stini"]
 
 [sub_resource type="Environment" id="Environment_0kfr3"]
 ssao_radius = 0.48
@@ -39,3 +40,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.236, 0.8015846, -13.389904
 
 [node name="Enemigo1" parent="." unique_id=1881378344 instance=ExtResource("3_xf22r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.34607, 0.7934792, -10.890958)
+
+[node name="PistolaRecogible" parent="." unique_id=1144396916 instance=ExtResource("4_stini")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5457257, 1.2722185, -1.9714211)
