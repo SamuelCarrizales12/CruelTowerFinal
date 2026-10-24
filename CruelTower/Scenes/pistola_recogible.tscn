@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bdovv4htpce1l"]
+[gd_scene format=3 uid="uid://b33ptl27c4g4u"]
 
 [ext_resource type="Script" uid="uid://covb8sjq717bj" path="res://Scripts/pistola_recogible.gd" id="1_4gtqk"]
 [ext_resource type="Texture2D" uid="uid://5sl73rdre5hl" path="res://Recursos/assets2.png" id="2_1njug"]

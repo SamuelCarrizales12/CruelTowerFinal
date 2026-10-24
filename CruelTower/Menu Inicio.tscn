@@ -1,106 +1,306 @@
 [gd_scene format=3 uid="uid://3v2eg03buwwq"]
 
-[ext_resource type="Script" uid="uid://dav2i2e6nmuim" path="res://Scripts/BotonesMenu.gd" id="1_34bhl"]
-[ext_resource type="Texture2D" uid="uid://pga07rv3qio" path="res://Iconos/BotonesInicio/Boton NP.png" id="1_jg08q"]
-[ext_resource type="Texture2D" uid="uid://yrbxhudfa0cj" path="res://Iconos/Botones presionados/Boton NPP.png" id="2_34bhl"]
-[ext_resource type="Texture2D" uid="uid://b2m635kbjsbc1" path="res://Iconos/BotonesInicio/Boton CP.png" id="2_u506t"]
-[ext_resource type="Texture2D" uid="uid://dex883wwjy5nl" path="res://Iconos/BotonesInicio/Boton C.png" id="3_q8rjw"]
-[ext_resource type="Texture2D" uid="uid://vr0ogyg7hh82" path="res://Iconos/BotonesInicio/Boton Salir.png" id="4_b00gg"]
-[ext_resource type="Texture2D" uid="uid://cyqexyq1lrium" path="res://Iconos/Botones presionados/Boton ConP.png" id="5_mgg7f"]
-[ext_resource type="Texture2D" uid="uid://b6fwbx2hafcv3" path="res://Iconos/Botones presionados/Boton CPP.png" id="5_pm57y"]
-[ext_resource type="Texture2D" uid="uid://bkc1tp7yx3kqe" path="res://Iconos/Botones presionados/Boton SalirP.png" id="9_cpi47"]
-[ext_resource type="AudioStream" uid="uid://dk5vuonmmjwug" path="res://Soundtrack/emmraan-fantasy-kingdom-261257.mp3" id="10_cpi47"]
+[ext_resource type="Script" uid="uid://dav2i2e6nmuim" path="res://Scripts/BotonesMenu.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://pga07rv3qio" path="res://Iconos/BotonesInicio/Boton NP.png" id="2_np"]
+[ext_resource type="Texture2D" uid="uid://yrbxhudfa0cj" path="res://Iconos/Botones presionados/Boton NPP.png" id="3_npp"]
+[ext_resource type="Texture2D" uid="uid://b2m635kbjsbc1" path="res://Iconos/BotonesInicio/Boton CP.png" id="4_cp"]
+[ext_resource type="Texture2D" uid="uid://b6fwbx2hafcv3" path="res://Iconos/Botones presionados/Boton CPP.png" id="5_cpp"]
+[ext_resource type="Texture2D" uid="uid://dex883wwjy5nl" path="res://Iconos/BotonesInicio/Boton C.png" id="6_c"]
+[ext_resource type="Texture2D" uid="uid://cyqexyq1lrium" path="res://Iconos/Botones presionados/Boton ConP.png" id="7_conp"]
+[ext_resource type="Texture2D" uid="uid://vr0ogyg7hh82" path="res://Iconos/BotonesInicio/Boton Salir.png" id="8_salir"]
+[ext_resource type="Texture2D" uid="uid://bkc1tp7yx3kqe" path="res://Iconos/Botones presionados/Boton SalirP.png" id="9_salirp"]
+[ext_resource type="AudioStream" uid="uid://dk5vuonmmjwug" path="res://Soundtrack/emmraan-fantasy-kingdom-261257.mp3" id="10_music"]
+[ext_resource type="PackedScene" uid="uid://cv4yr0g2n0oq4" path="res://Scenes/Mapa1.tscn" id="11_mapa1"]
+[ext_resource type="FontFile" uid="uid://dhbox61cmg16m" path="res://Recursos/Cinzel.ttf" id="12_font"]
 
-[node name="Botones" type="Control" unique_id=1654329437]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_medieval"]
+sky_top_color = Color(0.109804, 0.137255, 0.203922, 1)
+sky_horizon_color = Color(0.243137, 0.211765, 0.270588, 1)
+sky_curve = 0.14
+ground_bottom_color = Color(0.0588235, 0.0588235, 0.0784314, 1)
+ground_horizon_color = Color(0.188235, 0.176471, 0.219608, 1)
+sun_angle_max = 25.0
+
+[sub_resource type="Sky" id="Sky_medieval"]
+sky_material = SubResource("ProceduralSkyMaterial_medieval")
+
+[sub_resource type="Environment" id="Environment_medieval"]
+background_mode = 2
+sky = SubResource("Sky_medieval")
+ambient_light_source = 2
+ambient_light_color = Color(0.25, 0.26, 0.35, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 3
+tonemap_exposure = 1.05
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.18, 0.2, 0.26, 1)
+fog_light_energy = 0.8
+fog_density = 0.025
+
+[sub_resource type="Gradient" id="Gradient_vignette"]
+offsets = PackedFloat32Array(0, 0.42, 0.78, 1)
+colors = PackedColorArray(0, 0, 0, 0.05, 0, 0, 0, 0.25, 0.02, 0.015, 0.03, 0.65, 0, 0, 0, 0.92)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vignette"]
+gradient = SubResource("Gradient_vignette")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.85, 0.85)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.0392157, 0.0313726, 0.0470588, 0.52)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.380392, 0.301961, 0.188235, 0.45)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.65)
+shadow_size = 16
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("12_font")
+font_size = 54
+font_color = Color(0.960784, 0.890196, 0.741176, 1)
+outline_size = 8
+outline_color = Color(0.0784314, 0.0588235, 0.0470588, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.9)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_subtitle"]
+font = ExtResource("12_font")
+font_size = 14
+font_color = Color(0.745098, 0.678431, 0.54902, 0.85)
+outline_size = 4
+outline_color = Color(0.04, 0.03, 0.02, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_divider"]
+font = ExtResource("12_font")
+font_size = 12
+font_color = Color(0.568627, 0.478431, 0.329412, 0.65)
+
+[sub_resource type="LabelSettings" id="LabelSettings_footer"]
+font = ExtResource("12_font")
+font_size = 12
+font_color = Color(0.65, 0.62, 0.58, 0.55)
+
+[node name="MenuInicio" type="Control" unique_id=1654329437]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_34bhl")
+script = ExtResource("1_script")
 
-[node name="BS" type="TextureButton" parent="." unique_id=1195471877]
+[node name="BackgroundViewportContainer" type="SubViewportContainer" parent="." unique_id=1029384756]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.34722227
-anchor_top = 0.37037036
-anchor_right = 0.6266105
-anchor_bottom = 0.50617284
-offset_left = 17.337738
-offset_right = -4.8865967
-offset_bottom = 1.5258789e-05
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.072445, 1)
-pivot_offset = Vector2(239.32321, 172)
-texture_normal = ExtResource("1_jg08q")
-texture_pressed = ExtResource("2_34bhl")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
+mouse_filter = 2
+stretch = true
 
-[node name="BS2" type="TextureButton" parent="." unique_id=1842466001]
+[node name="BackgroundViewport" type="SubViewport" parent="BackgroundViewportContainer" unique_id=1029384757]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Panorama3D" type="Node3D" parent="BackgroundViewportContainer/BackgroundViewport" unique_id=1029384758]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BackgroundViewportContainer/BackgroundViewport/Panorama3D" unique_id=1029384759]
+environment = SubResource("Environment_medieval")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="BackgroundViewportContainer/BackgroundViewport/Panorama3D" unique_id=1029384760]
+transform = Transform3D(-0.404674, -0.562664, -0.720867, 0.49654, -0.797166, 0.343475, -0.767911, -0.218944, 0.601977, -5.778, 0, 2.967)
+light_color = Color(0.788235, 0.647059, 0.756863, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="TorchLightA" type="OmniLight3D" parent="BackgroundViewportContainer/BackgroundViewport/Panorama3D" unique_id=1029384761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, 2)
+light_color = Color(1, 0.68, 0.32, 1)
+light_energy = 2.0
+omni_range = 10.0
+omni_attenuation = 1.2
+
+[node name="TorchLightB" type="OmniLight3D" parent="BackgroundViewportContainer/BackgroundViewport/Panorama3D" unique_id=1029384762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.5, 4)
+light_color = Color(0.98, 0.62, 0.28, 1)
+light_energy = 1.8
+omni_range = 9.0
+omni_attenuation = 1.3
+
+[node name="Mapa1" parent="BackgroundViewportContainer/BackgroundViewport/Panorama3D" unique_id=573823728 instance=ExtResource("11_mapa1")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="CameraPivot" type="Node3D" parent="BackgroundViewportContainer/BackgroundViewport/Panorama3D" unique_id=1029384763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.2, 3)
+
+[node name="Camera3D" type="Camera3D" parent="BackgroundViewportContainer/BackgroundViewport/Panorama3D/CameraPivot" unique_id=1029384764]
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 0, 0)
+current = true
+
+[node name="VignetteOverlay" type="TextureRect" parent="." unique_id=1029384765]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.34722224
-anchor_top = 0.5185185
-anchor_right = 0.6266105
-anchor_bottom = 0.654321
-offset_left = 17.337738
-offset_right = -4.8865967
-offset_bottom = 1.5258789e-05
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.072445, 1)
-pivot_offset = Vector2(239.32321, 172)
-texture_normal = ExtResource("2_u506t")
-texture_pressed = ExtResource("5_pm57y")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vignette")
+expand_mode = 1
 
-[node name="BS3" type="TextureButton" parent="." unique_id=304520188]
+[node name="BackgroundDim" type="ColorRect" parent="." unique_id=1029384766]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.34722227
-anchor_top = 0.6666667
-anchor_right = 0.6266105
-anchor_bottom = 0.80246925
-offset_left = 17.337738
-offset_right = -4.8865967
-offset_bottom = 1.5258789e-05
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.072445, 1)
-pivot_offset = Vector2(239.32321, 172)
-texture_normal = ExtResource("3_q8rjw")
-texture_pressed = ExtResource("5_mgg7f")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
+mouse_filter = 2
+color = Color(0.02, 0.02, 0.03, 0.32)
 
-[node name="BS4" type="TextureButton" parent="." unique_id=1351255054]
+[node name="MainLayout" type="MarginContainer" parent="." unique_id=1029384767]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.34722224
-anchor_top = 0.8148148
-anchor_right = 0.6266105
-anchor_bottom = 0.9506174
-offset_left = 17.337738
-offset_right = -4.8865967
-offset_bottom = 1.5258789e-05
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.072445, 1)
-pivot_offset = Vector2(239.32321, 172)
-texture_normal = ExtResource("4_b00gg")
-texture_pressed = ExtResource("9_cpi47")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 20
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer2D" parent="." unique_id=535648756]
-stream = ExtResource("10_cpi47")
+[node name="CenterContainer" type="CenterContainer" parent="MainLayout" unique_id=1029384768]
+layout_mode = 2
+
+[node name="MenuPanel" type="PanelContainer" parent="MainLayout/CenterContainer" unique_id=1029384769]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="CardMargin" type="MarginContainer" parent="MainLayout/CenterContainer/MenuPanel" unique_id=1029384770]
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 28
+
+[node name="MenuVBox" type="VBoxContainer" parent="MainLayout/CenterContainer/MenuPanel/CardMargin" unique_id=1029384771]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TitleContainer" type="VBoxContainer" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox" unique_id=1029384772]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox/TitleContainer" unique_id=1029384773]
+unique_name_in_owner = true
+layout_mode = 2
+text = "CRUEL TOWER"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox/TitleContainer" unique_id=1029384774]
+unique_name_in_owner = true
+layout_mode = 2
+text = "— CHRONICLES OF THE ABYSS —"
+label_settings = SubResource("LabelSettings_subtitle")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleDivider" type="Label" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox/TitleContainer" unique_id=1029384775]
+layout_mode = 2
+text = "✦  ———————————————  ✦"
+label_settings = SubResource("LabelSettings_divider")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox" unique_id=1029384776]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="BtnNuevaPartida" type="TextureButton" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox/ButtonsContainer" unique_id=1195471877]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 78)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_np")
+texture_pressed = ExtResource("3_npp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnContinuar" type="TextureButton" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox/ButtonsContainer" unique_id=1842466001]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 78)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_cp")
+texture_pressed = ExtResource("5_cpp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnConfiguracion" type="TextureButton" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox/ButtonsContainer" unique_id=304520188]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 78)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_c")
+texture_pressed = ExtResource("7_conp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnSalir" type="TextureButton" parent="MainLayout/CenterContainer/MenuPanel/CardMargin/MenuVBox/ButtonsContainer" unique_id=1351255054]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 78)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_salir")
+texture_pressed = ExtResource("9_salirp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="FooterHBox" type="HBoxContainer" parent="MainLayout" unique_id=1029384777]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="VersionLabel" type="Label" parent="MainLayout/FooterHBox" unique_id=1029384778]
+layout_mode = 2
+text = "Cruel Tower v1.0.0"
+label_settings = SubResource("LabelSettings_footer")
+
+[node name="Spacer" type="Control" parent="MainLayout/FooterHBox" unique_id=1029384779]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EditionLabel" type="Label" parent="MainLayout/FooterHBox" unique_id=1029384780]
+layout_mode = 2
+text = "Dark Fantasy Edition"
+label_settings = SubResource("LabelSettings_footer")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=535648756]
+stream = ExtResource("10_music")
 autoplay = true
 parameters/looping = true
