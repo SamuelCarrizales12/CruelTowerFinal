@@ -1,8 +1,86 @@
 [gd_scene format=3 uid="uid://csmla3jyvng5r"]
 
-[ext_resource type="Script" uid="uid://cmliqirei7qnq" path="res://settings.gd" id="1_bvb5x"]
-[ext_resource type="Texture2D" uid="uid://cj46yahwnwyq2" path="res://Iconos/SaveLoadBotones/pngwing.com (4).png" id="2_2fv1l"]
-[ext_resource type="Texture2D" uid="uid://dfdm5d0xgx8s0" path="res://Settings.png" id="2_mx4kw"]
+[ext_resource type="Script" uid="uid://cmliqirei7qnq" path="res://settings.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dkpp4bmd7sjeu" path="res://Iconos/SaveLoadBotones/pngwing.com (1).png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://dfdm5d0xgx8s0" path="res://Settings.png" id="3_board"]
+[ext_resource type="Texture2D" uid="uid://cj46yahwnwyq2" path="res://Iconos/SaveLoadBotones/pngwing.com (4).png" id="4_return"]
+[ext_resource type="FontFile" path="res://Recursos/Cinzel.ttf" id="5_font"]
+[ext_resource type="Theme" path="res://themes/ui_theme.tres" id="6_theme"]
+
+[sub_resource type="Gradient" id="Gradient_vignette"]
+offsets = PackedFloat32Array(0, 0.45, 0.8, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.05, 0.03, 0.01, 0.06, 0.08, 0.05, 0.02, 0.3, 0.04, 0.02, 0.01, 0.7)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vignette"]
+gradient = SubResource("Gradient_vignette")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.85, 0.85)
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("5_font")
+font_size = 40
+font_color = Color(0.960784, 0.890196, 0.741176, 1)
+outline_size = 7
+outline_color = Color(0.121569, 0.0823529, 0.0509804, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_subtitle"]
+font = ExtResource("5_font")
+font_size = 14
+font_color = Color(0.745098, 0.678431, 0.54902, 0.9)
+outline_size = 4
+outline_color = Color(0.08, 0.05, 0.03, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_divider"]
+font = ExtResource("5_font")
+font_size = 12
+font_color = Color(0.568627, 0.478431, 0.329412, 0.7)
+
+[sub_resource type="LabelSettings" id="LabelSettings_return"]
+font = ExtResource("5_font")
+font_size = 16
+font_color = Color(0.960784, 0.901961, 0.780392, 1)
+outline_size = 5
+outline_color = Color(0.141176, 0.0901961, 0.0509804, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_row"]
+font = ExtResource("5_font")
+font_size = 16
+font_color = Color(0.92, 0.86, 0.72, 1)
+outline_size = 4
+outline_color = Color(0.12, 0.08, 0.05, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_percent"]
+font = ExtResource("5_font")
+font_size = 15
+font_color = Color(0.98, 0.88, 0.65, 1)
+outline_size = 4
+outline_color = Color(0.14, 0.09, 0.05, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="Shader" id="Shader_cut_chains"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	if (UV.y < 0.273) {
+		discard;
+	}
+	COLOR = texture(TEXTURE, UV);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_board"]
+shader = SubResource("Shader_cut_chains")
 
 [node name="Settings" type="Control" unique_id=1556132988]
 layout_mode = 3
@@ -11,84 +89,246 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bvb5x")
-metadata/_edit_lock_ = true
+theme = ExtResource("6_theme")
+script = ExtResource("1_script")
 
-[node name="Settings" type="Sprite2D" parent="." unique_id=1224549674]
-position = Vector2(648.00006, 272)
-scale = Vector2(0.74, 0.7361407)
-texture = ExtResource("2_mx4kw")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=904896619]
+[node name="BackgroundTexture" type="TextureRect" parent="." unique_id=47663980]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.462
-anchor_top = 0.45600003
-anchor_right = 0.58100003
-anchor_bottom = 0.62200004
-offset_left = -174.0
-offset_top = -96.32001
-offset_right = 136.31995
-offset_bottom = -31.840027
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VignetteOverlay" type="TextureRect" parent="." unique_id=1029384801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vignette")
+expand_mode = 1
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=1029384802]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 24
+
+[node name="MainVBox" type="VBoxContainer" parent="MainMargin" unique_id=1029384803]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderHBox" type="HBoxContainer" parent="MainMargin/MainVBox" unique_id=1029384804]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftSpacer" type="Control" parent="MainMargin/MainVBox/HeaderHBox" unique_id=1029384805]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="TitleVBox" type="VBoxContainer" parent="MainMargin/MainVBox/HeaderHBox" unique_id=1029384806]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/TitleVBox" unique_id=1029384807]
+unique_name_in_owner = true
+layout_mode = 2
+text = "CONFIGURACIÓN"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/TitleVBox" unique_id=1029384808]
+unique_name_in_owner = true
+layout_mode = 2
+text = "— CRUEL TOWER —"
+label_settings = SubResource("LabelSettings_subtitle")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DividerLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/TitleVBox" unique_id=1029384809]
+unique_name_in_owner = true
+layout_mode = 2
+text = "✦  ——————————————————  ✦"
+label_settings = SubResource("LabelSettings_divider")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReturnContainer" type="Control" parent="MainMargin/MainVBox/HeaderHBox" unique_id=864148954]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+
+[node name="BtnReturn" type="TextureButton" parent="MainMargin/MainVBox/HeaderHBox/ReturnContainer" unique_id=1104947575]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_return")
+flip_h = true
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ReturnLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/ReturnContainer/BtnReturn" unique_id=1029384810]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "← VOLVER"
+label_settings = SubResource("LabelSettings_return")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoardCenter" type="CenterContainer" parent="MainMargin/MainVBox" unique_id=1029384811]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BoardPanel" type="Control" parent="MainMargin/MainVBox/BoardCenter" unique_id=1224549674]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 2
+
+[node name="BoardTexture" type="TextureRect" parent="MainMargin/MainVBox/BoardCenter/BoardPanel" unique_id=1029384812]
+material = SubResource("ShaderMaterial_board")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -410.0
+offset_right = 400.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_board")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BoardMargin" type="MarginContainer" parent="MainMargin/MainVBox/BoardCenter/BoardPanel" unique_id=1029384813]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 175.0
+offset_top = 80.0
+offset_right = -175.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsVBox" type="VBoxContainer" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin" unique_id=904896619]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="RowVolume" type="HBoxContainer" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox" unique_id=1029384814]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="LabelVolume" type="Label" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowVolume" unique_id=2003120282]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "VOLUMEN"
+label_settings = SubResource("LabelSettings_row")
+
+[node name="VolumeBox" type="HBoxContainer" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowVolume" unique_id=1029384815]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Volume" type="HSlider" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowVolume/VolumeBox" unique_id=931153169]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
-accessibility_region = true
+max_value = 1.0
+step = 0.01
+value = 0.8
 
-[node name="LabelVolume" type="Label" parent="VBoxContainer" unique_id=2003120282]
+[node name="VolumePercent" type="Label" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowVolume/VolumeBox" unique_id=1029384816]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Volume"
+text = "80%"
+label_settings = SubResource("LabelSettings_percent")
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Volume" type="HSlider" parent="VBoxContainer" unique_id=931153169]
+[node name="RowMute" type="HBoxContainer" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox" unique_id=1029384817]
 layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
 
-[node name="LabelVolumen" type="Label" parent="VBoxContainer" unique_id=1050629803]
+[node name="LabelMute" type="Label" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowMute" unique_id=1050629803]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Mute"
+text = "SILENCIAR"
+label_settings = SubResource("LabelSettings_row")
 
-[node name="LabelVolumen2" type="Label" parent="VBoxContainer" unique_id=1617876343]
+[node name="MuteBox" type="HBoxContainer" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowMute" unique_id=1029384818]
 layout_mode = 2
-text = "Resolution"
+size_flags_horizontal = 3
 
-[node name="Resolutions" type="OptionButton" parent="VBoxContainer" unique_id=643834114]
+[node name="Mute" type="CheckBox" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowMute/MuteBox" unique_id=2137076899]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 2
+mouse_default_cursor_shape = 2
+text = " Silenciar audio"
+
+[node name="RowResolution" type="HBoxContainer" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox" unique_id=1029384819]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="LabelResolution" type="Label" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowResolution" unique_id=1617876343]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "RESOLUCIÓN"
+label_settings = SubResource("LabelSettings_row")
+
+[node name="Resolutions" type="OptionButton" parent="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowResolution" unique_id=643834114]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
 selected = 2
 item_count = 3
-popup/item_0/text = "1920x1080"
+popup/item_0/text = "1920x1080 (Full HD)"
 popup/item_0/id = 0
 popup/item_1/text = "1600x900"
 popup/item_1/id = 1
-popup/item_2/text = "1280x720"
+popup/item_2/text = "1280x720 (HD)"
 popup/item_2/id = 2
 
-[node name="Return" type="Sprite2D" parent="." unique_id=700782379]
-position = Vector2(808, 184)
-rotation = 0.0020970476
-scale = Vector2(0.31560403, 0.23787555)
-texture = ExtResource("2_2fv1l")
-
-[node name="Return" type="TextureButton" parent="Return" unique_id=1681184196]
-anchors_preset = -1
-anchor_right = 0.78800005
-anchor_bottom = 0.9620001
-offset_left = -192.92029
-offset_top = -86.61194
-offset_right = -197.83621
-offset_bottom = -88.51224
-metadata/_edit_use_anchors_ = true
-
-[node name="Mute" type="CheckBox" parent="." unique_id=2137076899]
-layout_mode = 0
-offset_left = 704.0
-offset_top = 288.0
-offset_right = 736.0
-offset_bottom = 312.0
-size_flags_horizontal = 4
-
-[connection signal="value_changed" from="VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
-[connection signal="pressed" from="Return/Return" to="." method="_on_return_pressed"]
-[connection signal="toggled" from="Mute" to="." method="_on_mute_toggled"]
+[connection signal="pressed" from="MainMargin/MainVBox/HeaderHBox/ReturnContainer/BtnReturn" to="." method="_on_return_pressed"]
+[connection signal="value_changed" from="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowVolume/VolumeBox/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="toggled" from="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowMute/MuteBox/Mute" to="." method="_on_mute_toggled"]
+[connection signal="item_selected" from="MainMargin/MainVBox/BoardCenter/BoardPanel/BoardMargin/SettingsVBox/RowResolution/Resolutions" to="." method="_on_resolutions_item_selected"]

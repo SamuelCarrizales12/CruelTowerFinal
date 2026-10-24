@@ -1,238 +1,624 @@
 [gd_scene format=3 uid="uid://bwl233hilqxww"]
 
-[ext_resource type="Texture2D" uid="uid://dkpp4bmd7sjeu" path="res://Iconos/SaveLoadBotones/pngwing.com (1).png" id="1_ope2g"]
-[ext_resource type="Script" uid="uid://bbm3s2fa5a4c1" path="res://Scripts/SaveSlots.gd" id="1_ualoh"]
-[ext_resource type="Texture2D" uid="uid://cevk7b3nwm5el" path="res://Iconos/SaveLoadBotones/SSC.png" id="2_tcty5"]
-[ext_resource type="Texture2D" uid="uid://cj46yahwnwyq2" path="res://Iconos/SaveLoadBotones/pngwing.com (4).png" id="4_i4p64"]
-[ext_resource type="AudioStream" uid="uid://bsyumeh0vkh7f" path="res://Soundtrack/Alexander Nakarada - Planning.mp3" id="5_i4p64"]
+[ext_resource type="Script" uid="uid://bbm3s2fa5a4c1" path="res://Scripts/SaveSlots.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dkpp4bmd7sjeu" path="res://Iconos/SaveLoadBotones/pngwing.com (1).png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://cevk7b3nwm5el" path="res://Iconos/SaveLoadBotones/SSC.png" id="3_slot_board"]
+[ext_resource type="Texture2D" uid="uid://cj46yahwnwyq2" path="res://Iconos/SaveLoadBotones/pngwing.com (4).png" id="4_return_arrow"]
+[ext_resource type="AudioStream" uid="uid://bsyumeh0vkh7f" path="res://Soundtrack/Alexander Nakarada - Planning.mp3" id="5_music"]
+[ext_resource type="FontFile" path="res://Recursos/Cinzel.ttf" id="6_font"]
+[ext_resource type="Texture2D" path="res://Iconos/SaveLoadBotones/BotonBorrar.png" id="7_del"]
+[ext_resource type="Texture2D" path="res://Iconos/SaveLoadBotones/BotonBorrarP.png" id="8_del_p"]
+[ext_resource type="Texture2D" uid="uid://b2m635kbjsbc1" path="res://Iconos/BotonesInicio/Boton CP.png" id="9_cp"]
+[ext_resource type="Texture2D" uid="uid://b6fwbx2hafcv3" path="res://Iconos/Botones presionados/Boton CPP.png" id="10_cpp"]
 
-[node name="Control" type="Control" unique_id=42811270]
+[sub_resource type="Gradient" id="Gradient_vignette"]
+offsets = PackedFloat32Array(0, 0.45, 0.8, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.05, 0.03, 0.01, 0.06, 0.08, 0.05, 0.02, 0.3, 0.04, 0.02, 0.01, 0.7)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vignette"]
+gradient = SubResource("Gradient_vignette")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.85, 0.85)
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("6_font")
+font_size = 40
+font_color = Color(0.960784, 0.890196, 0.741176, 1)
+outline_size = 7
+outline_color = Color(0.121569, 0.0823529, 0.0509804, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_subtitle"]
+font = ExtResource("6_font")
+font_size = 14
+font_color = Color(0.745098, 0.678431, 0.54902, 0.9)
+outline_size = 4
+outline_color = Color(0.08, 0.05, 0.03, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_divider"]
+font = ExtResource("6_font")
+font_size = 12
+font_color = Color(0.568627, 0.478431, 0.329412, 0.7)
+
+[sub_resource type="LabelSettings" id="LabelSettings_return"]
+font = ExtResource("6_font")
+font_size = 16
+font_color = Color(0.960784, 0.901961, 0.780392, 1)
+outline_size = 5
+outline_color = Color(0.141176, 0.0901961, 0.0509804, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_slot_title"]
+font = ExtResource("6_font")
+font_size = 18
+font_color = Color(0.960784, 0.890196, 0.741176, 1)
+outline_size = 5
+outline_color = Color(0.141176, 0.0901961, 0.0509804, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_slot_status"]
+font = ExtResource("6_font")
+font_size = 12
+font_color = Color(0.88, 0.75, 0.45, 1)
+outline_size = 3
+outline_color = Color(0.12, 0.07, 0.03, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_slot_level"]
+font = ExtResource("6_font")
+font_size = 16
+font_color = Color(0.96, 0.90, 0.78, 1)
+outline_size = 4
+outline_color = Color(0.12, 0.08, 0.05, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.7)
+
+[sub_resource type="Shader" id="Shader_cut_chains"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	if (UV.y < 0.315) {
+		discard;
+	}
+	COLOR = texture(TEXTURE, UV);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_board"]
+shader = SubResource("Shader_cut_chains")
+
+[sub_resource type="LabelSettings" id="LabelSettings_slot_meta"]
+font = ExtResource("6_font")
+font_size = 11
+font_color = Color(0.80, 0.74, 0.64, 0.95)
+outline_size = 3
+outline_color = Color(0.1, 0.06, 0.04, 1)
+
+[node name="SaveSlotsControl" type="Control" unique_id=42811270]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ualoh")
+script = ExtResource("1_script")
 
-[node name="FondoSS" type="Sprite2D" parent="." unique_id=47663980]
-position = Vector2(638, 359.25)
-scale = Vector2(1.284, 1.2815276)
-texture = ExtResource("1_ope2g")
-metadata/_edit_lock_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1593401228]
+[node name="BackgroundTexture" type="TextureRect" parent="." unique_id=47663980]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.076000005
-anchor_top = 0.395
-anchor_right = 0.88900006
-anchor_bottom = 0.76500005
-offset_left = -1.2800064
-offset_top = -124.399994
-offset_right = 14.143921
-offset_bottom = 27.839966
-scale = Vector2(1.0718355, 1.1667393)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VignetteOverlay" type="TextureRect" parent="." unique_id=1029384801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vignette")
+expand_mode = 1
+
+[node name="VigaTexture" type="TextureRect" parent="." unique_id=1029384899]
+z_index = 1
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 135.0
+offset_bottom = 243.0
+grow_horizontal = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=1029384802]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 24
+
+[node name="MainVBox" type="VBoxContainer" parent="MainMargin" unique_id=1029384803]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HeaderHBox" type="HBoxContainer" parent="MainMargin/MainVBox" unique_id=1029384804]
+layout_mode = 2
 alignment = 1
 
-[node name="Slot1" type="Control" parent="HBoxContainer" unique_id=2056253541]
+[node name="LeftSpacer" type="Control" parent="MainMargin/MainVBox/HeaderHBox" unique_id=1029384805]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
-[node name="Ssc" type="Sprite2D" parent="HBoxContainer/Slot1" unique_id=1272584866]
-position = Vector2(-316, 192)
-scale = Vector2(0.61500007, 0.71451175)
-texture = ExtResource("2_tcty5")
+[node name="TitleVBox" type="VBoxContainer" parent="MainMargin/MainVBox/HeaderHBox" unique_id=1029384806]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer/Slot1/Ssc" unique_id=1223888842]
-anchors_preset = -1
-anchor_left = 0.186
-anchor_top = 0.439
-anchor_right = 0.57600003
-anchor_bottom = 0.54200006
-offset_left = -300.21793
-offset_top = -287.55283
-offset_right = -300.07162
-offset_bottom = -276.72604
-metadata/_edit_use_anchors_ = true
+[node name="TitleLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/TitleVBox" unique_id=1029384807]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SELECCIÓN DE PARTIDA"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LabelInfoP" type="Label" parent="HBoxContainer/Slot1/Ssc/Label" unique_id=1185061305]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.056
-anchor_top = 1.9820001
-anchor_right = 1.6110001
-anchor_bottom = 3.7990003
-offset_left = -12.904012
-offset_top = 0.005996704
-offset_right = -350.2845
-offset_bottom = -93.47
-scale = Vector2(7.616946, 4.1481094)
-metadata/_edit_use_anchors_ = true
+[node name="SubtitleLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/TitleVBox" unique_id=1029384808]
+unique_name_in_owner = true
+layout_mode = 2
+text = "— CRUEL TOWER —"
+label_settings = SubResource("LabelSettings_subtitle")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="SeleccP" type="TextureButton" parent="HBoxContainer/Slot1/Ssc" unique_id=150081383]
-anchors_preset = -1
-anchor_left = 0.11000001
-anchor_top = 0.62100005
-anchor_right = 0.84700006
-anchor_bottom = 0.90500003
-offset_left = -300.14633
-offset_top = -276.23428
-offset_right = -300.07
-offset_bottom = -276.53592
-metadata/_edit_use_anchors_ = true
+[node name="DividerLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/TitleVBox" unique_id=1029384809]
+layout_mode = 2
+text = "✦  ——————————————————  ✦"
+label_settings = SubResource("LabelSettings_divider")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BorrarP" type="TextureButton" parent="HBoxContainer/Slot1/Ssc" unique_id=1461381582]
-anchors_preset = -1
-anchor_left = 0.69500005
-anchor_top = 0.379
-anchor_right = 0.869
-anchor_bottom = 0.601
-offset_left = -299.92688
-offset_top = -276.76575
-offset_right = -300.26187
-offset_bottom = -276.37073
-metadata/_edit_use_anchors_ = true
-
-[node name="Slot3" type="Control" parent="HBoxContainer" unique_id=222086745]
+[node name="ReturnContainer" type="Control" parent="MainMargin/MainVBox/HeaderHBox" unique_id=864148954]
+custom_minimum_size = Vector2(180, 60)
 layout_mode = 2
 
-[node name="Ssc3" type="Sprite2D" parent="HBoxContainer/Slot3" unique_id=99894839]
-position = Vector2(298, 192)
-scale = Vector2(0.615, 0.71451163)
-texture = ExtResource("2_tcty5")
-
-[node name="Label3" type="Label" parent="HBoxContainer/Slot3/Ssc3" unique_id=1505879659]
-anchors_preset = -1
-anchor_left = 1.064
-anchor_top = 0.41900003
-anchor_right = 1.4540002
-anchor_bottom = 0.54
-offset_left = -823.76587
-offset_top = -276.49286
-offset_right = -823.6196
-offset_bottom = -275.62006
-metadata/_edit_use_anchors_ = true
-
-[node name="LabelInfoP3" type="Label" parent="HBoxContainer/Slot3/Ssc3/Label3" unique_id=608782812]
+[node name="BtnReturn" type="TextureButton" parent="MainMargin/MainVBox/HeaderHBox/ReturnContainer" unique_id=1104947575]
+unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.056
-anchor_top = 1.9820001
-anchor_right = 1.6110001
-anchor_bottom = 3.7990003
-offset_left = -12.904012
-offset_top = 0.005996704
-offset_right = -350.2845
-offset_bottom = -93.47
-scale = Vector2(7.616946, 4.1481094)
-metadata/_edit_use_anchors_ = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_return_arrow")
+flip_h = true
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="SeleccP3" type="TextureButton" parent="HBoxContainer/Slot3/Ssc3" unique_id=1817667162]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.62100005
-anchor_right = 1.7360001
-anchor_bottom = 0.90500003
-offset_left = -837.3984
-offset_top = -276.23425
-offset_right = -836.7221
-offset_bottom = -276.5359
-metadata/_edit_use_anchors_ = true
+[node name="ReturnLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/ReturnContainer/BtnReturn" unique_id=1029384810]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "← VOLVER"
+label_settings = SubResource("LabelSettings_return")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BorrarP3" type="TextureButton" parent="HBoxContainer/Slot3/Ssc3" unique_id=432918515]
-anchors_preset = -1
-anchor_left = 1.562
-anchor_top = 0.379
-anchor_right = 1.7360001
-anchor_bottom = 0.58100003
-offset_left = -823.3789
-offset_top = -276.76578
-offset_right = -823.71405
-offset_bottom = -265.3108
-metadata/_edit_use_anchors_ = true
+[node name="SlotsCenter" type="CenterContainer" parent="MainMargin/MainVBox" unique_id=1029384811]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Slot2" type="Control" parent="HBoxContainer" unique_id=1244818938]
+[node name="SlotsHBox" type="HBoxContainer" parent="MainMargin/MainVBox/SlotsCenter" unique_id=1593401228]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Slot1" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox" unique_id=2056253541]
+custom_minimum_size = Vector2(350, 420)
 layout_mode = 2
 
-[node name="Ssc2" type="Sprite2D" parent="HBoxContainer/Slot2" unique_id=1913481067]
-position = Vector2(-12.000061, 192)
-scale = Vector2(0.61500007, 0.71451175)
-texture = ExtResource("2_tcty5")
+[node name="ChainLeft" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1029384901]
+texture_filter = 2
+layout_mode = 1
+offset_left = 32.0
+offset_top = -5.0
+offset_right = 97.0
+offset_bottom = 168.0
+mouse_filter = 2
+stretch_mode = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/Slot2/Ssc2" unique_id=2104079957]
-anchors_preset = -1
-anchor_left = 0.186
-anchor_top = 0.439
-anchor_right = 0.57600003
-anchor_bottom = 0.54200006
-offset_left = -300.21793
-offset_top = -287.55283
-offset_right = -300.07162
-offset_bottom = -276.72604
-metadata/_edit_use_anchors_ = true
+[node name="ChainRight" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1029384902]
+texture_filter = 2
+layout_mode = 1
+offset_left = 253.0
+offset_top = -5.0
+offset_right = 318.0
+offset_bottom = 168.0
+mouse_filter = 2
+stretch_mode = 1
 
-[node name="LabelInfoP" type="Label" parent="HBoxContainer/Slot2/Ssc2/Label2" unique_id=492896835]
+[node name="BoardTexture" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1272584866]
+material = SubResource("ShaderMaterial_board")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_slot_board")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TopLeftFrame" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1029384812]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.056
-anchor_top = 1.9820001
-anchor_right = 1.6110001
-anchor_bottom = 3.7990003
-offset_left = -12.904012
-offset_top = 0.005996704
-offset_right = -350.2845
-offset_bottom = -93.47
-scale = Vector2(7.616946, 4.1481094)
-metadata/_edit_use_anchors_ = true
+anchor_left = 0.13
+anchor_top = 0.39
+anchor_right = 0.65
+anchor_bottom = 0.57
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
 
-[node name="SeleccP2" type="TextureButton" parent="HBoxContainer/Slot2/Ssc2" unique_id=1038764249]
+[node name="SlotTitle" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1/TopLeftFrame" unique_id=1223888842]
+layout_mode = 2
+text = "RANURA 1"
+label_settings = SubResource("LabelSettings_slot_title")
+horizontal_alignment = 1
+
+[node name="SlotStatus" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1/TopLeftFrame" unique_id=1029384813]
+layout_mode = 2
+text = "VACÍO"
+label_settings = SubResource("LabelSettings_slot_status")
+horizontal_alignment = 1
+
+[node name="TopRightFrame" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1029384814]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.11000001
-anchor_top = 0.62100005
-anchor_right = 0.84700006
-anchor_bottom = 0.90500003
-offset_left = -300.14633
-offset_top = -276.23428
-offset_right = -300.07
-offset_bottom = -276.53592
-metadata/_edit_use_anchors_ = true
+anchor_left = 0.70
+anchor_top = 0.40
+anchor_right = 0.85
+anchor_bottom = 0.56
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="BorrarP2" type="TextureButton" parent="HBoxContainer/Slot2/Ssc2" unique_id=1140085434]
+[node name="BtnDelete" type="TextureButton" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1/TopRightFrame" unique_id=1461381582]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Eliminar partida guardada"
+focus_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_del")
+texture_pressed = ExtResource("8_del_p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BottomFrame" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1029384815]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.69500005
-anchor_top = 0.379
-anchor_right = 0.869
-anchor_bottom = 0.601
-offset_left = -299.92688
-offset_top = -276.76575
-offset_right = -300.26187
-offset_bottom = -276.37073
-metadata/_edit_use_anchors_ = true
+anchor_left = 0.12
+anchor_top = 0.63
+anchor_right = 0.88
+anchor_bottom = 0.93
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
 
-[node name="Return" type="Sprite2D" parent="." unique_id=864148954]
-position = Vector2(1056, 104)
-rotation = 0.0020970479
-scale = Vector2(0.5528324, 0.362548)
-texture = ExtResource("4_i4p64")
+[node name="InfoContainer" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1/BottomFrame" unique_id=1185061305]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
 
-[node name="Return" type="TextureButton" parent="Return" unique_id=1104947575]
+[node name="LevelLabel" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1/BottomFrame/InfoContainer" unique_id=1029384816]
+layout_mode = 2
+text = "Nivel 1"
+label_settings = SubResource("LabelSettings_slot_level")
+horizontal_alignment = 1
+
+[node name="MetaLabel" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1/BottomFrame/InfoContainer" unique_id=1029384817]
+layout_mode = 2
+text = "Reciente | Tiempo: 00:00"
+label_settings = SubResource("LabelSettings_slot_meta")
+horizontal_alignment = 1
+
+[node name="BtnAction" type="TextureButton" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1/BottomFrame" unique_id=150081383]
+custom_minimum_size = Vector2(250, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_cp")
+texture_pressed = ExtResource("10_cpp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Slot2" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox" unique_id=1244818938]
+custom_minimum_size = Vector2(350, 420)
+layout_mode = 2
+
+[node name="ChainLeft" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1029384903]
+texture_filter = 2
+layout_mode = 1
+offset_left = 32.0
+offset_top = -5.0
+offset_right = 97.0
+offset_bottom = 168.0
+mouse_filter = 2
+stretch_mode = 1
+
+[node name="ChainRight" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1029384904]
+texture_filter = 2
+layout_mode = 1
+offset_left = 253.0
+offset_top = -5.0
+offset_right = 318.0
+offset_bottom = 168.0
+mouse_filter = 2
+stretch_mode = 1
+
+[node name="BoardTexture" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1913481067]
+material = SubResource("ShaderMaterial_board")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_slot_board")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TopLeftFrame" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1029384818]
+layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.78800005
-anchor_bottom = 0.9620001
-offset_left = -192.92029
-offset_top = -86.61194
-offset_right = -197.83621
-offset_bottom = -88.51224
-metadata/_edit_use_anchors_ = true
+anchor_left = 0.13
+anchor_top = 0.39
+anchor_right = 0.65
+anchor_bottom = 0.57
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=230924644]
-stream = ExtResource("5_i4p64")
+[node name="SlotTitle" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2/TopLeftFrame" unique_id=2104079957]
+layout_mode = 2
+text = "RANURA 2"
+label_settings = SubResource("LabelSettings_slot_title")
+horizontal_alignment = 1
+
+[node name="SlotStatus" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2/TopLeftFrame" unique_id=1029384819]
+layout_mode = 2
+text = "VACÍO"
+label_settings = SubResource("LabelSettings_slot_status")
+horizontal_alignment = 1
+
+[node name="TopRightFrame" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1029384820]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.70
+anchor_top = 0.40
+anchor_right = 0.85
+anchor_bottom = 0.56
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BtnDelete" type="TextureButton" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2/TopRightFrame" unique_id=1140085434]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Eliminar partida guardada"
+focus_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_del")
+texture_pressed = ExtResource("8_del_p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BottomFrame" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1029384821]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12
+anchor_top = 0.63
+anchor_right = 0.88
+anchor_bottom = 0.93
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="InfoContainer" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2/BottomFrame" unique_id=492896835]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="LevelLabel" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2/BottomFrame/InfoContainer" unique_id=1029384822]
+layout_mode = 2
+text = "Ranura Disponible"
+label_settings = SubResource("LabelSettings_slot_level")
+horizontal_alignment = 1
+
+[node name="MetaLabel" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2/BottomFrame/InfoContainer" unique_id=1029384823]
+layout_mode = 2
+text = "Sin partida guardada"
+label_settings = SubResource("LabelSettings_slot_meta")
+horizontal_alignment = 1
+
+[node name="BtnAction" type="TextureButton" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2/BottomFrame" unique_id=1038764249]
+custom_minimum_size = Vector2(250, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_cp")
+texture_pressed = ExtResource("10_cpp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Slot3" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox" unique_id=222086745]
+custom_minimum_size = Vector2(350, 420)
+layout_mode = 2
+
+[node name="ChainLeft" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=1029384905]
+texture_filter = 2
+layout_mode = 1
+offset_left = 32.0
+offset_top = -5.0
+offset_right = 97.0
+offset_bottom = 168.0
+mouse_filter = 2
+stretch_mode = 1
+
+[node name="ChainRight" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=1029384906]
+texture_filter = 2
+layout_mode = 1
+offset_left = 253.0
+offset_top = -5.0
+offset_right = 318.0
+offset_bottom = 168.0
+mouse_filter = 2
+stretch_mode = 1
+
+[node name="BoardTexture" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=99894839]
+material = SubResource("ShaderMaterial_board")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_slot_board")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TopLeftFrame" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=1029384824]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13
+anchor_top = 0.39
+anchor_right = 0.65
+anchor_bottom = 0.57
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="SlotTitle" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3/TopLeftFrame" unique_id=1505879659]
+layout_mode = 2
+text = "RANURA 3"
+label_settings = SubResource("LabelSettings_slot_title")
+horizontal_alignment = 1
+
+[node name="SlotStatus" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3/TopLeftFrame" unique_id=1029384825]
+layout_mode = 2
+text = "VACÍO"
+label_settings = SubResource("LabelSettings_slot_status")
+horizontal_alignment = 1
+
+[node name="TopRightFrame" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=1029384826]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.70
+anchor_top = 0.40
+anchor_right = 0.85
+anchor_bottom = 0.56
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BtnDelete" type="TextureButton" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3/TopRightFrame" unique_id=432918515]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Eliminar partida guardada"
+focus_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_del")
+texture_pressed = ExtResource("8_del_p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BottomFrame" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=1029384827]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12
+anchor_top = 0.63
+anchor_right = 0.88
+anchor_bottom = 0.93
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="InfoContainer" type="VBoxContainer" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3/BottomFrame" unique_id=608782812]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="LevelLabel" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3/BottomFrame/InfoContainer" unique_id=1029384828]
+layout_mode = 2
+text = "Nivel 1"
+label_settings = SubResource("LabelSettings_slot_level")
+horizontal_alignment = 1
+
+[node name="MetaLabel" type="Label" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3/BottomFrame/InfoContainer" unique_id=1029384829]
+layout_mode = 2
+text = "Reciente | Tiempo: 00:00"
+label_settings = SubResource("LabelSettings_slot_meta")
+horizontal_alignment = 1
+
+[node name="BtnAction" type="TextureButton" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3/BottomFrame" unique_id=1817667162]
+custom_minimum_size = Vector2(250, 58)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_cp")
+texture_pressed = ExtResource("10_cpp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=230924644]
+stream = ExtResource("5_music")
 autoplay = true
+bus = &"Master"
 parameters/looping = true
-
-[connection signal="pressed" from="HBoxContainer/Slot1/Ssc/SeleccP" to="." method="_on_selecc_p_pressed_slot1"]
-[connection signal="pressed" from="HBoxContainer/Slot1/Ssc/SeleccP" to="." method="_on_selecc_p_pressed_slot_1"]
-[connection signal="pressed" from="HBoxContainer/Slot3/Ssc3/SeleccP3" to="." method="_on_selecc_p_pressed_slot_3"]
-[connection signal="pressed" from="HBoxContainer/Slot2/Ssc2/SeleccP2" to="." method="_on_selecc_p_pressed_slot1"]
-[connection signal="pressed" from="HBoxContainer/Slot2/Ssc2/SeleccP2" to="." method="_on_selecc_p_pressed_slot_1"]
-[connection signal="pressed" from="Return/Return" to="." method="_on_return_pressed"]
