@@ -7,6 +7,10 @@
 radius = 0.22851563
 height = 2.2105923
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ms6xa"]
+bg_color = Color(0.06666667, 0.24705882, 0, 1)
+border_color = Color(0.85360575, 0.8251379, 0.22120494, 1)
+
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1198284294]
 script = ExtResource("1_oolk3")
 
@@ -65,5 +69,14 @@ offset_bottom = 688.0
 text = "12/36"
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="BarraVida" type="ProgressBar" parent="CanvasLayer" unique_id=1544620862]
+offset_left = 68.0
+offset_top = 658.0
+offset_right = 368.0
+offset_bottom = 685.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ms6xa")
+value = 100.0
+show_percentage = false
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1787889576]

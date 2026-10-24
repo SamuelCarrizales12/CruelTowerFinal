@@ -80,7 +80,11 @@ func _physics_process(delta: float) -> void:
 				# Usamos has_method("curar") como truco para asegurarnos de que es el jugador
 				# y no otro enemigo u otra caja de madera
 				if objeto_chocado.has_method("curar"):
-					objeto_chocado.recibir_dano(15)
+					var direccion_golpe = global_position.direction_to(objeto_chocado.global_position)
+					direccion_golpe.y = 0
+					direccion_golpe = direccion_golpe.normalized()
+					
+					objeto_chocado.recibir_dano(3, direccion_golpe, self)
 					cooldown_ataque = 1.0 
 
 # --- LEVITACIÓN VISUAL ---

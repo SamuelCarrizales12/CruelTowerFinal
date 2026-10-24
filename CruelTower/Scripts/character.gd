@@ -18,6 +18,7 @@ var tiempo_paso = 0.0
 var tiene_pistola = false
 @onready var texto_interaccion = $CanvasLayer/Label
 @onready var texto_municion = $CanvasLayer/TextoMunicion
+@onready var barra_vida = $CanvasLayer/BarraVida
 
 var municion_actual := 12
 var tamano_cargador := 12
@@ -26,11 +27,14 @@ var recargando := false
 
 var salud_maxima := 100
 var salud_actual := 100
+var vector_retroceso := Vector3.ZERO
 
 var coleccionables_obtenidos := []
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	barra_vida.max_value = salud_maxima
+	barra_vida.value = salud_actual
 
 func _unhandled_input(event):
 	if esta_disparando:
@@ -56,8 +60,6 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			velocity.x = direction.x * velocidad_actual
 			velocity.z = direction.z * velocidad_actual
-			#var look_dir = Vector2(velocity.z, velocity.x)
-			#rotation.y = look_dir.angle()
 		else:
 			velocity.x = move_toward(velocity.x, 0, velocidad_actual)
 			velocity.z = move_toward(velocity.z, 0, velocidad_actual)
@@ -76,7 +78,7 @@ func _physics_process(delta: float) -> void:
 				# Si el objeto tiene la función 'recoger', se ejecuta
 				if objeto_mirado.has_method("recoger"):
 					var distancia = global_position.distance_to(objeto_mirado.global_position)
-					if distancia <= 1.0:
+					if distancia <= 3.0:
 						objeto_mirado.recoger(self)
 			
 		if direction and is_on_floor() and not esta_disparando:
@@ -87,13 +89,9 @@ func _physics_process(delta: float) -> void:
 				
 			camara.h_offset = cos(tiempo_paso * 0.5) * amplitud
 			camara.v_offset = sin(tiempo_paso) * amplitud
-			#camara.rotation.x = cos(tiempo_paso * 0.5) * amplitud
-			#camara.rotation.y = sin(tiempo_paso) * amplitud
 		else:
 			camara.h_offset = lerp(camara.h_offset, 0.0, 8.0 * delta)
 			camara.v_offset = lerp(camara.v_offset, 0.0, 8.0 * delta)
-			#camara.rotation.x = lerp(camara.rotation.x, 0.0, 8.0 * delta)
-			#camara.rotation.y = lerp(camara.rotation.y, 0.0, 8.0 * delta)
 			
 		if Input.is_action_pressed("apuntar"):
 			camara.fov = lerp(camara.fov, FOV_APUNTADO, 10.0 * delta)
@@ -120,7 +118,7 @@ func _physics_process(delta: float) -> void:
 					texto_interaccion.visible = true
 					texto_interaccion.text = "Presiona [ E ] para interactuar"
 				else:
-					mirilla.color = Color(1,1,1)
+					mirilla.color = Color(1, 1, 1)
 					texto_interaccion.visible = false
 			# 3. Si es pared o suelo
 			else:
@@ -132,8 +130,17 @@ func _physics_process(delta: float) -> void:
 	else:
 		mirilla.color = Color(1, 1, 1)
 		texto_interaccion.visible = false
+	
+	if vector_retroceso.length() > 0.1:
+		velocity.x += vector_retroceso.x
+		velocity.z += vector_retroceso.z
+		
+		vector_retroceso = vector_retroceso.lerp(Vector3.ZERO, 10.0 * delta)
+	else:
+		vector_retroceso = Vector3.ZERO
 		
 	move_and_slide()
+	
 	if tiene_pistola:
 		texto_municion.visible = true
 		texto_municion.text = str(municion_actual) + " / " + str(municion_reserva)
@@ -142,11 +149,12 @@ func _physics_process(delta: float) -> void:
 
 func disparar():
 	if municion_actual <= 0:
-		print("Cargador vacio")
+		print("Cargador vacío")
 		return
+		
 	municion_actual -= 1
-	
 	esta_disparando = true
+	
 	var direccion_retroceso = pivot.transform.basis.z.normalized()
 	velocity.x = direccion_retroceso.x * 10.0
 	velocity.z = direccion_retroceso.z * 10.0
@@ -154,7 +162,7 @@ func disparar():
 	raycast.force_raycast_update()
 	
 	if raycast.is_colliding():
-		var objetivo = raycast.get_collider() # Obtenemos el nodo golpeado
+		var objetivo = raycast.get_collider()
 		
 		if objetivo.has_method("recibir_dano"):
 			var direccion_tiro = global_position.direction_to(objetivo.global_position)
@@ -172,7 +180,7 @@ func recargar():
 		return
 	
 	recargando = true
-	print ("Recargando")
+	print("Recargando...")
 	
 	await get_tree().create_timer(1.5).timeout
 	var balas_faltantes = tamano_cargador - municion_actual
@@ -186,17 +194,21 @@ func recargar():
 		
 	recargando = false
 	print("Arma lista. Munición: ", municion_actual, "/", municion_reserva)
-	
-func recibir_dano(cantidad: int):
+
+func recibir_dano(cantidad: int, direccion_impacto: Vector3 = Vector3.ZERO, _atacante: Node3D = null):
 	salud_actual -= cantidad
+	barra_vida.value = salud_actual
+	
+	if direccion_impacto != Vector3.ZERO:
+		vector_retroceso = direccion_impacto * 3.0 
+		velocity.y = 5.0 
+	
 	if salud_actual <= 0:
 		print("¡ESTÁS MUERTO!")
-		
+
 func curar(cantidad: int):
 	salud_actual += cantidad
-	
-	# Evitamos que la vida pase de 100
 	if salud_actual > salud_maxima:
 		salud_actual = salud_maxima
-		
-	print("¡Curado! Salud: ", salud_actual)
+	
+	barra_vida.value = salud_actual

@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://b3wdss57u3gxq"]
 
 [ext_resource type="PackedScene" uid="uid://cv4yr0g2n0oq4" path="res://Scenes/Mapa1.tscn" id="1_ymplu"]
-[ext_resource type="PackedScene" uid="uid://jior2nldywqg" path="res://Scenes/Character.tscn" id="2_xf22r"]
+[ext_resource type="PackedScene" uid="uid://dqjxnkcowvclp" path="res://Scenes/Character.tscn" id="2_xf22r"]
 [ext_resource type="PackedScene" uid="uid://cvdqn5afy4b45" path="res://Scenes/enemigo1.tscn" id="3_xf22r"]
-[ext_resource type="PackedScene" uid="uid://bdovv4htpce1l" path="res://Scenes/pistola_recogible.tscn" id="4_stini"]
+[ext_resource type="PackedScene" uid="uid://b33ptl27c4g4u" path="res://Scenes/pistola_recogible.tscn" id="4_stini"]
 [ext_resource type="PackedScene" uid="uid://c3u438pnauiuo" path="res://Scenes/caja_municion.tscn" id="5_r05mj"]
 [ext_resource type="PackedScene" uid="uid://bfyywu5b1345h" path="res://Scenes/objeto_coleccionable.tscn" id="6_q2kgp"]
 [ext_resource type="Texture2D" uid="uid://be5hd0qkh0nvn" path="res://Recursos/Scary2.png" id="7_14pon"]
-[ext_resource type="Texture2D" uid="uid://b0j6kt2knuy8n" path="res://Recursos/Win5.png" id="8_103w2"]
 
 [sub_resource type="Environment" id="Environment_0kfr3"]
 ssao_radius = 0.48
@@ -87,8 +86,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4720638, 0.19132137, -3.96
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.564873, 1.1826999, -12.016678)
 nombre_objeto = "mona china 1"
 imagen_objeto = ExtResource("7_14pon")
-
-[node name="ObjetoColeccionable2" parent="." unique_id=1773598147 instance=ExtResource("6_q2kgp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2897563, 0.1364572, -11.879731)
-nombre_objeto = "mona china 2"
-imagen_objeto = ExtResource("8_103w2")
