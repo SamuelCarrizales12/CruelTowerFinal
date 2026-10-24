@@ -30,11 +30,16 @@ var salud_actual := 100
 var vector_retroceso := Vector3.ZERO
 
 var coleccionables_obtenidos := []
+var esta_muerto := false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	barra_vida.max_value = salud_maxima
 	barra_vida.value = salud_actual
+	
+	# --- TELEMETRÍA ---
+	add_to_group("jugador")
+	Telemetria.iniciar_run(self, str(SaveLoad.contents_to_save.get("level_name", "Nivel 1")))
 
 func _unhandled_input(event):
 	if esta_disparando:
@@ -153,6 +158,7 @@ func disparar():
 		return
 		
 	municion_actual -= 1
+	Telemetria.evento("shot", {"ammo": municion_actual})
 	esta_disparando = true
 	
 	var direccion_retroceso = pivot.transform.basis.z.normalized()
@@ -180,6 +186,7 @@ func recargar():
 		return
 	
 	recargando = true
+	Telemetria.evento("reload")
 	print("Recargando...")
 	
 	await get_tree().create_timer(1.5).timeout
@@ -196,8 +203,17 @@ func recargar():
 	print("Arma lista. Munición: ", municion_actual, "/", municion_reserva)
 
 func recibir_dano(cantidad: int, direccion_impacto: Vector3 = Vector3.ZERO, _atacante: Node3D = null):
+	if esta_muerto:
+		return
+	
 	salud_actual -= cantidad
 	barra_vida.value = salud_actual
+	
+	# --- TELEMETRÍA: quién nos golpeó ---
+	var fuente := "desconocido"
+	if _atacante != null and _atacante.get("nombre_manada") != null:
+		fuente = str(_atacante.get("nombre_manada"))
+	Telemetria.evento("damage_taken", {"amount": cantidad, "hp": salud_actual, "source": fuente})
 	
 	if direccion_impacto != Vector3.ZERO:
 		vector_retroceso = direccion_impacto * 3.0 
@@ -205,8 +221,13 @@ func recibir_dano(cantidad: int, direccion_impacto: Vector3 = Vector3.ZERO, _ata
 	
 	if salud_actual <= 0:
 		print("¡ESTÁS MUERTO!")
+		esta_muerto = true
+		Telemetria.muerte(fuente)
+		# Opcional: reiniciar el nivel para poder volver a intentarlo (y medir más muertes):
+		# get_tree().create_timer(1.5).timeout.connect(func(): get_tree().reload_current_scene())
 
 func curar(cantidad: int):
+	Telemetria.evento("heal", {"amount": cantidad})
 	salud_actual += cantidad
 	if salud_actual > salud_maxima:
 		salud_actual = salud_maxima

@@ -8,6 +8,10 @@ const TEX_CONT: String = "uid://b2m635kbjsbc1"    # Boton CP
 const TEX_CONT_P: String = "uid://b6fwbx2hafcv3"  # Boton CPP
 
 @onready var slots_box: HBoxContainer = %SlotsHBox
+
+# Ventana para escribir el nombre (ver NombreJugador.gd)
+var _dialogo: DialogoNombre = null
+var _confirmacion: DialogoConfirmar = null
 @onready var btn_return: TextureButton = %BtnReturn
 
 func _ready() -> void:
@@ -34,7 +38,8 @@ func _update_slot(slot_num: int) -> void:
 	var ocupado: bool = SaveLoad.has_save(slot_num)
 	if ocupado:
 		var d: Dictionary = SaveLoad.get_slot_info(slot_num)
-		status.text = "OCUPADO"
+		var nombre_guardado: String = str(d.get("player_name", ""))
+		status.text = nombre_guardado.to_upper() if nombre_guardado != "" else "OCUPADO"
 		nivel.text = str(d.get("level_name", "Nivel 1"))
 		meta.text = "%s | Tiempo: %s" % [d.get("save_date", "--"), d.get("play_time", "00:00")]
 	else:
@@ -52,16 +57,54 @@ func _update_slot(slot_num: int) -> void:
 	btn.modulate = Color(1, 1, 1, 0.4) if btn.disabled else Color.WHITE
 
 func _handle_select_slot(slot_num: int) -> void:
+	if _dialogo != null or _confirmacion != null:
+		return
 	if SaveLoad.es_nueva_partida:
-		SaveLoad.new_game(slot_num)
-		get_tree().change_scene_to_file(SaveLoad.ESCENA_JUEGO)
+		# Nueva partida: primero pedimos el nombre
+		_pedir_nombre(slot_num, _iniciar_nueva_partida.bind(slot_num))
 	else:
 		if not SaveLoad.has_save(slot_num):
 			return
-		if SaveLoad.load_game(slot_num):
+		if not SaveLoad.load_game(slot_num):
+			return
+		if SaveLoad.nombre_jugador() == "":
+			# Partida guardada antes de existir esta pantalla: se pide el nombre una vez
+			_pedir_nombre(slot_num, _nombrar_y_continuar.bind(slot_num))
+		else:
 			get_tree().change_scene_to_file(SaveLoad.ESCENA_JUEGO)
 
+func _pedir_nombre(slot_num: int, al_confirmar: Callable) -> void:
+	_dialogo = DialogoNombre.new()
+	_dialogo.slot_num = slot_num
+	_dialogo.confirmado.connect(al_confirmar)
+	_dialogo.tree_exited.connect(func(): _dialogo = null)
+	add_child(_dialogo)
+
+# La señal "confirmado" entrega el nombre primero; bind() agrega la ranura después
+func _iniciar_nueva_partida(nombre: String, slot_num: int) -> void:
+	SaveLoad.new_game(slot_num, nombre)
+	get_tree().change_scene_to_file(SaveLoad.ESCENA_JUEGO)
+
+func _nombrar_y_continuar(nombre: String, slot_num: int) -> void:
+	SaveLoad.asignar_nombre(nombre, slot_num)
+	get_tree().change_scene_to_file(SaveLoad.ESCENA_JUEGO)
+
 func _handle_delete_slot(slot_num: int) -> void:
+	if _dialogo != null or _confirmacion != null:
+		return
+	var detalle: String = "la Ranura %d" % slot_num
+	var nombre: String = str(SaveLoad.get_slot_info(slot_num).get("player_name", ""))
+	if nombre != "":
+		detalle += " (%s)" % nombre
+	_confirmacion = DialogoConfirmar.new()
+	_confirmacion.titulo = "¿BORRAR PARTIDA?"
+	_confirmacion.mensaje = "¿Seguro que quieres borrar %s?\nEsta acción no se puede deshacer." % detalle
+	_confirmacion.texto_confirmar = "BORRAR"
+	_confirmacion.confirmado.connect(_borrar_confirmado.bind(slot_num))
+	_confirmacion.tree_exited.connect(func(): _confirmacion = null)
+	add_child(_confirmacion)
+
+func _borrar_confirmado(slot_num: int) -> void:
 	SaveLoad.delete_slot(slot_num)
 	update_all_slots_ui()
 

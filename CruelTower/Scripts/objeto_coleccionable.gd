@@ -10,6 +10,7 @@ func _ready():
 		sprite.texture = imagen_objeto
 
 func recoger(jugador: Node3D):
+	Telemetria.evento("collectible", {"name": nombre_objeto})
 	jugador.coleccionables_obtenidos.append(nombre_objeto)
 	
 	print("¡Has encontrado: ", nombre_objeto, "!")

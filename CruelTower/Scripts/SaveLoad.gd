@@ -10,6 +10,9 @@ var es_nueva_partida: bool = true
 # Slot seleccionado actualmente (1, 2 o 3)
 var current_slot: int = 1
 
+# Segundos jugados en partidas anteriores de esta ranura (al continuar se parte de aquí)
+var tiempo_base_s: float = 0.0
+
 # Estructura base de datos
 var contents_to_save: Dictionary = _default_data()
 
@@ -20,7 +23,8 @@ func _default_data() -> Dictionary:
 		"new_data_to_save": false,
 		"save_date": "",         # Ej: "17/10/2026 21:40"
 		"level_name": "Nivel 1", # Ej: "Bosque Encantado"
-		"play_time": "00:00"     # Tiempo jugado
+		"play_time": "00:00",    # Tiempo jugado
+		"player_name": ""        # Nombre que escribe el jugador
 	}
 
 # Obtiene la ruta formateada según el número de slot
@@ -28,9 +32,12 @@ func _get_save_path(slot: int) -> String:
 	return SAVE_PATH_TEMPLATE % slot
 
 # Reinicia los datos y crea el archivo del slot desde cero
-func new_game(slot: int) -> void:
+func new_game(slot: int, nombre: String = "") -> void:
 	contents_to_save = _default_data()
+	contents_to_save["player_name"] = nombre
+	tiempo_base_s = 0.0
 	save_game(slot)
+	_aplicar_nombre_a_telemetria()
 
 # Guardar en un slot específico (por defecto usa current_slot)
 func save_game(slot: int = current_slot) -> void:
@@ -89,7 +96,8 @@ func delete_slot(slot: int) -> void:
 
 func _apply_loaded_data() -> void:
 	# Aplica los datos cargados a tu partida
-	pass
+	tiempo_base_s = _texto_a_segundos(str(contents_to_save.get("play_time", "00:00")))
+	_aplicar_nombre_a_telemetria()
 
 ## Retorna un diccionario con los datos del slot sin sobreescribir el estado global en memoria
 func get_slot_info(slot: int) -> Dictionary:
@@ -113,6 +121,49 @@ func create_new_game(slot: int) -> void:
 		"new_data_to_save": true,
 		"save_date": "",
 		"level_name": "Nivel 1",
-		"play_time": "00:00"
+		"play_time": "00:00",
+		"player_name": ""
 	}
 	save_game(slot)
+
+## Nombre del jugador de la partida actual ("" si la partida es antigua y no tiene nombre)
+func nombre_jugador() -> String:
+	return str(contents_to_save.get("player_name", ""))
+
+## Guarda un nombre en una partida ya existente (para partidas hechas antes de esta pantalla)
+func asignar_nombre(nombre: String, slot: int = current_slot) -> void:
+	contents_to_save["player_name"] = nombre
+	save_game(slot)
+	_aplicar_nombre_a_telemetria()
+
+# El nombre del archivo de guardado es el que se reporta en la base de datos
+func _aplicar_nombre_a_telemetria() -> void:
+	var nombre := nombre_jugador()
+	if nombre != "" and has_node("/root/Telemetria"):
+		get_node("/root/Telemetria").set_username(nombre)
+
+## Guarda la partida en curso en la ranura actual, sumando el tiempo de esta sesión
+func guardar_partida_actual() -> void:
+	var jugado: float = tiempo_base_s
+	if has_node("/root/Telemetria"):
+		jugado += get_node("/root/Telemetria").t_run
+	contents_to_save["play_time"] = _segundos_a_texto(jugado)
+	save_game(current_slot)
+	print("Partida guardada en la ranura %d (%s)" % [current_slot, contents_to_save["play_time"]])
+
+func _segundos_a_texto(segundos: float) -> String:
+	var total: int = int(segundos)
+	var h: int = total / 3600
+	var m: int = (total % 3600) / 60
+	var s: int = total % 60
+	if h > 0:
+		return "%d:%02d:%02d" % [h, m, s]
+	return "%02d:%02d" % [m, s]
+
+func _texto_a_segundos(texto: String) -> float:
+	var partes: PackedStringArray = texto.split(":")
+	if partes.size() == 3:
+		return partes[0].to_int() * 3600.0 + partes[1].to_int() * 60.0 + partes[2].to_int()
+	if partes.size() == 2:
+		return partes[0].to_int() * 60.0 + partes[1].to_int()
+	return 0.0

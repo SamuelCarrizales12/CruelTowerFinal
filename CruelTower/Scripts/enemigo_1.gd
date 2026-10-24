@@ -99,6 +99,7 @@ func recibir_dano(cantidad: int, direccion_impacto: Vector3, atacante: Node3D):
 		return
 		
 	vida -= cantidad
+	Telemetria.evento("hit", {"enemy": nombre_manada, "damage": cantidad}, global_position)
 	alertar(atacante)
 	
 	if vida <= 0:
@@ -123,6 +124,7 @@ func recibir_dano(cantidad: int, direccion_impacto: Vector3, atacante: Node3D):
 
 func morir():
 	muerto = true
+	Telemetria.evento("enemy_kill", {"enemy": nombre_manada}, global_position)
 	aturdido = true # Congelamos su movimiento para que no siga resbalando
 	
 	# Apagamos la colisión de forma segura
