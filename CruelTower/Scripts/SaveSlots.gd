@@ -1,11 +1,18 @@
 extends Control
 
-# Usamos get_node_or_null para evitar que el motor falle si no encuentra un nodo
-@onready var label_slot_1: Label = $HBoxContainer/Slot1/Ssc.get_node_or_null("Label") if has_node("HBoxContainer/Slot1/Ssc") else null
-@onready var label_slot_2: Label = $HBoxContainer/Ssc2.get_node_or_null("Label") if has_node("HBoxContainer/Ssc2") else null
-@onready var label_slot_3: Label = $HBoxContainer/Ssc3.get_node_or_null("Label") if has_node("HBoxContainer/Ssc3") else null
+@onready var label_slot_1: Label = get_node_or_null("HBoxContainer/Slot1/Ssc/Label")
+@onready var label_slot_2: Label = get_node_or_null("HBoxContainer/Slot2/Ssc2/Label2")
+@onready var label_slot_3: Label = get_node_or_null("HBoxContainer/Slot3/Ssc3/Label3")
+
+@onready var btn_borrar_1: TextureButton = get_node_or_null("HBoxContainer/Slot1/Ssc/BorrarP")
+@onready var btn_borrar_2: TextureButton = get_node_or_null("HBoxContainer/Slot2/Ssc2/BorrarP2")
+@onready var btn_borrar_3: TextureButton = get_node_or_null("HBoxContainer/Slot3/Ssc3/BorrarP3")
 
 func _ready() -> void:
+	# Los botones de borrar no estaban conectados en la escena
+	if btn_borrar_1: btn_borrar_1.pressed.connect(_on_borrar_p_pressed_slot_1)
+	if btn_borrar_2: btn_borrar_2.pressed.connect(_on_borrar_p_pressed_slot_2)
+	if btn_borrar_3: btn_borrar_3.pressed.connect(_on_borrar_p_pressed_slot_3)
 	update_all_slots_ui()
 
 func update_all_slots_ui() -> void:
@@ -14,7 +21,6 @@ func update_all_slots_ui() -> void:
 	_update_slot_label(3, label_slot_3)
 
 func _update_slot_label(slot_num: int, label_node: Label) -> void:
-	# Si la etiqueta no existe en la escena, simplemente se ignora sin romper el juego
 	if label_node == null:
 		return
 		
@@ -30,11 +36,16 @@ func _on_selecc_p_pressed_slot_2() -> void: _handle_select_slot(2)
 func _on_selecc_p_pressed_slot_3() -> void: _handle_select_slot(3)
 
 func _handle_select_slot(slot_num: int) -> void:
-	if SaveLoad.has_save(slot_num):
-		SaveLoad.load_game(slot_num)
+	if SaveLoad.es_nueva_partida:
+		# Nueva partida: reinicia datos, crea el guardado y entra al juego
+		SaveLoad.new_game(slot_num)
+		get_tree().change_scene_to_file(SaveLoad.ESCENA_JUEGO)
 	else:
-		SaveLoad.save_game(slot_num)
-	get_tree().change_scene_to_file("res://Menu Inicio.tscn")
+		# Continuar: solo si el slot tiene una partida guardada
+		if not SaveLoad.has_save(slot_num):
+			return
+		if SaveLoad.load_game(slot_num):
+			get_tree().change_scene_to_file(SaveLoad.ESCENA_JUEGO)
 
 func _on_borrar_p_pressed_slot_1() -> void: _handle_delete_slot(1)
 func _on_borrar_p_pressed_slot_2() -> void: _handle_delete_slot(2)

@@ -142,6 +142,3 @@ func disparar():
 	tween.tween_property(camara, "position:z", 0.5, 0.0)
 	tween.tween_property(camara, "position:z", posicion_original_z, 0.8)
 	tween.tween_callback(func(): esta_disparando = false)
-		# Aquí podrías llamar a una función del enemigo para restarle vida. Ejemplo:
-		# if objetivo.has_method("recibir_dano"):
-		#     objetivo.recibir_dano(10)

@@ -1,22 +1,36 @@
 extends Node
 
-# Usamos %s como marcador para insertar el número del slot dinámicamente
+# Usamos %d como marcador para insertar el número del slot dinámicamente
 const SAVE_PATH_TEMPLATE: String = "user://save_slot_%d.dat"
+const ESCENA_JUEGO: String = "uid://b3wdss57u3gxq" # res://Scenes/escenaprueba.tscn
+
+# true = viene de "Nueva Partida", false = viene de "Continuar Partida"
+var es_nueva_partida: bool = true
 
 # Slot seleccionado actualmente (1, 2 o 3)
 var current_slot: int = 1
 
 # Estructura base de datos
-var contents_to_save: Dictionary = {
-	"progress_bar_value": 0.0,
-	"new_data_to_save": false,
-	"save_date": "",      # Ej: "17/10/2026 - 21:40"
-	"level_name": "Nivel 1", # Ej: "Bosque Encantado"
-	"play_time": "00:00"  # Tiempo jugado
-}
+var contents_to_save: Dictionary = _default_data()
+
+# Valores iniciales de una partida nueva
+func _default_data() -> Dictionary:
+	return {
+		"progress_bar_value": 0.0,
+		"new_data_to_save": false,
+		"save_date": "",         # Ej: "17/10/2026 21:40"
+		"level_name": "Nivel 1", # Ej: "Bosque Encantado"
+		"play_time": "00:00"     # Tiempo jugado
+	}
+
 # Obtiene la ruta formateada según el número de slot
 func _get_save_path(slot: int) -> String:
 	return SAVE_PATH_TEMPLATE % slot
+
+# Reinicia los datos y crea el archivo del slot desde cero
+func new_game(slot: int) -> void:
+	contents_to_save = _default_data()
+	save_game(slot)
 
 # Guardar en un slot específico (por defecto usa current_slot)
 func save_game(slot: int = current_slot) -> void:
@@ -53,6 +67,8 @@ func load_game(slot: int = current_slot) -> bool:
 	file.close()
 	
 	if loaded_data is Dictionary:
+		# Partimos de los valores por defecto y encima aplicamos lo guardado
+		contents_to_save = _default_data()
 		contents_to_save.merge(loaded_data, true)
 		_apply_loaded_data()
 		print("Slot %d cargado correctamente." % slot)

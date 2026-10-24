@@ -232,7 +232,9 @@ parameters/looping = true
 
 [connection signal="pressed" from="HBoxContainer/Slot1/Ssc/SeleccP" to="." method="_on_selecc_p_pressed_slot1"]
 [connection signal="pressed" from="HBoxContainer/Slot1/Ssc/SeleccP" to="." method="_on_selecc_p_pressed_slot_1"]
+[connection signal="pressed" from="HBoxContainer/Slot1/Ssc/BorrarP" to="." method="_on_borrar_p_pressed_slot_1"]
 [connection signal="pressed" from="HBoxContainer/Slot3/Ssc3/SeleccP3" to="." method="_on_selecc_p_pressed_slot_3"]
-[connection signal="pressed" from="HBoxContainer/Slot2/Ssc2/SeleccP2" to="." method="_on_selecc_p_pressed_slot1"]
-[connection signal="pressed" from="HBoxContainer/Slot2/Ssc2/SeleccP2" to="." method="_on_selecc_p_pressed_slot_1"]
+[connection signal="pressed" from="HBoxContainer/Slot3/Ssc3/BorrarP3" to="." method="_on_borrar_p_pressed_slot_3"]
+[connection signal="pressed" from="HBoxContainer/Slot2/Ssc2/SeleccP2" to="." method="_on_selecc_p_pressed_slot_2"]
+[connection signal="pressed" from="HBoxContainer/Slot2/Ssc2/BorrarP2" to="." method="_on_borrar_p_pressed_slot_2"]
 [connection signal="pressed" from="Return/Return" to="." method="_on_return_pressed"]
