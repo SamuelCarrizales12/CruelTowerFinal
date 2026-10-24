@@ -90,3 +90,30 @@ func delete_slot(slot: int) -> void:
 func _apply_loaded_data() -> void:
 	# Aplica los datos cargados a tu partida
 	pass
+
+## Retorna un diccionario con los datos del slot sin sobreescribir el estado global en memoria
+func get_slot_info(slot: int) -> Dictionary:
+	var path: String = _get_save_path(slot)
+	if not FileAccess.file_exists(path):
+		return {}
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return {}
+	var data = file.get_var()
+	file.close()
+	if data is Dictionary:
+		return data
+	return {}
+
+## Inicializa una partida nueva con datos limpios y la guarda en el slot indicado
+func create_new_game(slot: int) -> void:
+	current_slot = slot
+	contents_to_save = {
+		"progress_bar_value": 0.0,
+		"new_data_to_save": true,
+		"save_date": "",
+		"level_name": "Nivel 1",
+		"play_time": "00:00"
+	}
+	save_game(slot)
+
