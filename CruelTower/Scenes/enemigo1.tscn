@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cvdqn5afy4b45"]
+
+[ext_resource type="Script" uid="uid://bylhh0tvobh2k" path="res://Scripts/enemigo_1.gd" id="1_c0ehi"]
+[ext_resource type="Texture2D" uid="uid://mtqpmo0f8e1c" path="res://Recursos/icon.png" id="2_7rc34"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ms6xa"]
+radius = 0.54117364
+
+[node name="Enemigo1" type="CharacterBody3D" unique_id=1881378344]
+script = ExtResource("1_c0ehi")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2120905451]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+texture = ExtResource("2_7rc34")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=442259449]
+shape = SubResource("SphereShape3D_ms6xa")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1655480090]
