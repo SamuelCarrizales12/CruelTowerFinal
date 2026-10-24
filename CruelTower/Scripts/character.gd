@@ -16,7 +16,6 @@ var esta_disparando = false
 var tiempo_paso = 0.0
 
 var tiene_pistola = false
-@onready var texto_interaccion = $CanvasLayer/Label
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -38,6 +37,7 @@ func _physics_process(delta: float) -> void:
 		var velocidad_actual = SPEED
 		if Input.is_action_pressed("correr") and not Input.is_action_pressed("apuntar"):
 			velocidad_actual = SPEED_RUN
+			
 			
 		var input_dir := Input.get_vector("mover_izquierda", "mover_derecha", "mover_adelante", "mover_atras")
 		var direction := (pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -61,9 +61,7 @@ func _physics_process(delta: float) -> void:
 				
 				# Si el objeto tiene la función 'recoger', se ejecuta
 				if objeto_mirado.has_method("recoger"):
-					var distancia = global_position.distance_to(objeto_mirado.global_position)
-					if distancia <= 1.0:
-						objeto_mirado.recoger(self)
+					objeto_mirado.recoger(self)
 			
 		if direction and is_on_floor() and not esta_disparando:
 			tiempo_paso += delta * velocity.length() * 1.5
@@ -82,6 +80,7 @@ func _physics_process(delta: float) -> void:
 			#camara.rotation.y = lerp(camara.rotation.y, 0.0, 8.0 * delta)
 			
 		if Input.is_action_pressed("apuntar"):
+			# lerp hace una transición suave entre el valor actual y el deseado
 			camara.fov = lerp(camara.fov, FOV_APUNTADO, 10.0 * delta)
 		else:
 			camara.fov = lerp(camara.fov, FOV_NORMAL, 10.0 * delta)
@@ -90,35 +89,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, 0.0, 8.0 * delta)
 		velocity.z = lerp(velocity.z, 0.0, 8.0 * delta)
 		
-	# --- LÓGICA DE COLOR DE LA MIRA Y TEXTO DE INTERACCIÓN ---
 	if raycast.is_colliding():
 		var objetivo_mirado = raycast.get_collider()
-		if is_instance_valid(objetivo_mirado):
-			# 1. Si miramos a un enemigo
-			if objetivo_mirado.has_method("recibir_dano") or objetivo_mirado.has_method("alertar"):
-				mirilla.color = Color(0.714, 0.0, 0.157, 1.0) 
-				texto_interaccion.visible = false
-			# 2. Si miramos a un objeto interactuable
-			elif objetivo_mirado.has_method("recoger"):
-				var distancia = global_position.distance_to(objetivo_mirado.global_position)
-				if distancia <= 1.0:
-					mirilla.color = Color(1, 1, 1) 
-					texto_interaccion.visible = true
-					texto_interaccion.text = "Presiona [ E ] para recoger arma"
-				else:
-					mirilla.color = Color(1,1,1)
-					texto_interaccion.visible = false
-			# 3. Si es pared o suelo
-			else:
-				mirilla.color = Color(1, 1, 1) 
-				texto_interaccion.visible = false
+		if is_instance_valid(objetivo_mirado) and objetivo_mirado.has_method("alertar"):
+			mirilla.color = Color(0.714, 0.0, 0.157, 1.0) # Rojo
 		else:
-			mirilla.color = Color(1, 1, 1)
-			texto_interaccion.visible = false
+			mirilla.color = Color(1, 1, 1) # Blanco (si mira a una pared)
 	else:
-		mirilla.color = Color(1, 1, 1)
-		texto_interaccion.visible = false
-		
+		mirilla.color = Color(1, 1, 1) # Blanco (si mira al vacío)
 	move_and_slide()
 
 func disparar():

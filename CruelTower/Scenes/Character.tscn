@@ -46,15 +46,4 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=993495612]
-visible = false
-offset_left = 518.0
-offset_top = 402.0
-offset_right = 763.0
-offset_bottom = 425.0
-text = "\"Presiona [ E ] para 
-interactuar\""
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Node3D" type="Node3D" parent="." unique_id=1787889576]

@@ -116,4 +116,3 @@ func create_new_game(slot: int) -> void:
 		"play_time": "00:00"
 	}
 	save_game(slot)
-

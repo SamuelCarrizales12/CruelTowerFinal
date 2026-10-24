@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://cevk7b3nwm5el" path="res://Iconos/SaveLoadBotones/SSC.png" id="3_slot_board"]
 [ext_resource type="Texture2D" uid="uid://cj46yahwnwyq2" path="res://Iconos/SaveLoadBotones/pngwing.com (4).png" id="4_return_arrow"]
 [ext_resource type="AudioStream" uid="uid://bsyumeh0vkh7f" path="res://Soundtrack/Alexander Nakarada - Planning.mp3" id="5_music"]
-[ext_resource type="FontFile" path="res://Recursos/Cinzel.ttf" id="6_font"]
-[ext_resource type="Texture2D" path="res://Iconos/SaveLoadBotones/BotonBorrar.png" id="7_del"]
-[ext_resource type="Texture2D" path="res://Iconos/SaveLoadBotones/BotonBorrarP.png" id="8_del_p"]
+[ext_resource type="FontFile" uid="uid://dhbox61cmg16m" path="res://Recursos/Cinzel.ttf" id="6_font"]
+[ext_resource type="Texture2D" uid="uid://dxe7kapq023vy" path="res://Iconos/SaveLoadBotones/BotonBorrar.png" id="7_del"]
+[ext_resource type="Texture2D" uid="uid://bhaii1o1500vl" path="res://Iconos/SaveLoadBotones/BotonBorrarP.png" id="8_del_p"]
 [ext_resource type="Texture2D" uid="uid://b2m635kbjsbc1" path="res://Iconos/BotonesInicio/Boton CP.png" id="9_cp"]
 [ext_resource type="Texture2D" uid="uid://b6fwbx2hafcv3" path="res://Iconos/Botones presionados/Boton CPP.png" id="10_cpp"]
 
@@ -45,13 +45,26 @@ font_color = Color(0.568627, 0.478431, 0.329412, 0.7)
 
 [sub_resource type="LabelSettings" id="LabelSettings_return"]
 font = ExtResource("6_font")
-font_size = 16
 font_color = Color(0.960784, 0.901961, 0.780392, 1)
 outline_size = 5
 outline_color = Color(0.141176, 0.0901961, 0.0509804, 1)
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.75)
 shadow_offset = Vector2(0, 2)
+
+[sub_resource type="Shader" id="Shader_cut_chains"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	if (UV.y < 0.315) {
+		discard;
+	}
+	COLOR = texture(TEXTURE, UV);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_board"]
+shader = SubResource("Shader_cut_chains")
 
 [sub_resource type="LabelSettings" id="LabelSettings_slot_title"]
 font = ExtResource("6_font")
@@ -72,31 +85,16 @@ outline_color = Color(0.12, 0.07, 0.03, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_slot_level"]
 font = ExtResource("6_font")
-font_size = 16
-font_color = Color(0.96, 0.90, 0.78, 1)
+font_color = Color(0.96, 0.9, 0.78, 1)
 outline_size = 4
 outline_color = Color(0.12, 0.08, 0.05, 1)
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 0.7)
 
-[sub_resource type="Shader" id="Shader_cut_chains"]
-code = "shader_type canvas_item;
-
-void fragment() {
-	if (UV.y < 0.315) {
-		discard;
-	}
-	COLOR = texture(TEXTURE, UV);
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_board"]
-shader = SubResource("Shader_cut_chains")
-
 [sub_resource type="LabelSettings" id="LabelSettings_slot_meta"]
 font = ExtResource("6_font")
 font_size = 11
-font_color = Color(0.80, 0.74, 0.64, 0.95)
+font_color = Color(0.8, 0.74, 0.64, 0.95)
 outline_size = 3
 outline_color = Color(0.1, 0.06, 0.04, 1)
 
@@ -210,12 +208,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_return_arrow")
-flip_h = true
 ignore_texture_size = true
 stretch_mode = 5
+flip_h = true
 
 [node name="ReturnLabel" type="Label" parent="MainMargin/MainVBox/HeaderHBox/ReturnContainer/BtnReturn" unique_id=1029384810]
 layout_mode = 1
@@ -302,9 +299,8 @@ horizontal_alignment = 1
 
 [node name="TopRightFrame" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1029384814]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.70
-anchor_top = 0.40
+anchor_left = 0.7
+anchor_top = 0.4
 anchor_right = 0.85
 anchor_bottom = 0.56
 grow_horizontal = 2
@@ -318,7 +314,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Eliminar partida guardada"
-focus_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("7_del")
 texture_pressed = ExtResource("8_del_p")
@@ -358,7 +353,6 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(250, 58)
 layout_mode = 2
 size_flags_horizontal = 4
-focus_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_cp")
 texture_pressed = ExtResource("10_cpp")
@@ -428,9 +422,8 @@ horizontal_alignment = 1
 
 [node name="TopRightFrame" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1029384820]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.70
-anchor_top = 0.40
+anchor_left = 0.7
+anchor_top = 0.4
 anchor_right = 0.85
 anchor_bottom = 0.56
 grow_horizontal = 2
@@ -444,7 +437,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Eliminar partida guardada"
-focus_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("7_del")
 texture_pressed = ExtResource("8_del_p")
@@ -484,7 +476,6 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(250, 58)
 layout_mode = 2
 size_flags_horizontal = 4
-focus_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_cp")
 texture_pressed = ExtResource("10_cpp")
@@ -554,9 +545,8 @@ horizontal_alignment = 1
 
 [node name="TopRightFrame" type="Control" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=1029384826]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.70
-anchor_top = 0.40
+anchor_left = 0.7
+anchor_top = 0.4
 anchor_right = 0.85
 anchor_bottom = 0.56
 grow_horizontal = 2
@@ -570,7 +560,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Eliminar partida guardada"
-focus_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("7_del")
 texture_pressed = ExtResource("8_del_p")
@@ -610,7 +599,6 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(250, 58)
 layout_mode = 2
 size_flags_horizontal = 4
-focus_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_cp")
 texture_pressed = ExtResource("10_cpp")
@@ -620,6 +608,4 @@ stretch_mode = 5
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=230924644]
 stream = ExtResource("5_music")
 autoplay = true
-bus = &"Master"
 parameters/looping = true
-
