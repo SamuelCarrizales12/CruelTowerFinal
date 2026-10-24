@@ -1,59 +1,69 @@
 extends Control
 
-@onready var label_slot_1: Label = get_node_or_null("HBoxContainer/Slot1/Ssc/Label")
-@onready var label_slot_2: Label = get_node_or_null("HBoxContainer/Slot2/Ssc2/Label2")
-@onready var label_slot_3: Label = get_node_or_null("HBoxContainer/Slot3/Ssc3/Label3")
+# Escenas y texturas por UID
+const ESCENA_MENU: String = "uid://3v2eg03buwwq"   # Menu_Inicio.tscn
+const TEX_NUEVA: String = "uid://pga07rv3qio"     # Boton NP
+const TEX_NUEVA_P: String = "uid://yrbxhudfa0cj"  # Boton NPP
+const TEX_CONT: String = "uid://b2m635kbjsbc1"    # Boton CP
+const TEX_CONT_P: String = "uid://b6fwbx2hafcv3"  # Boton CPP
 
-@onready var btn_borrar_1: TextureButton = get_node_or_null("HBoxContainer/Slot1/Ssc/BorrarP")
-@onready var btn_borrar_2: TextureButton = get_node_or_null("HBoxContainer/Slot2/Ssc2/BorrarP2")
-@onready var btn_borrar_3: TextureButton = get_node_or_null("HBoxContainer/Slot3/Ssc3/BorrarP3")
+@onready var slots_box: HBoxContainer = %SlotsHBox
+@onready var btn_return: TextureButton = %BtnReturn
 
 func _ready() -> void:
-	# Los botones de borrar no estaban conectados en la escena
-	if btn_borrar_1: btn_borrar_1.pressed.connect(_on_borrar_p_pressed_slot_1)
-	if btn_borrar_2: btn_borrar_2.pressed.connect(_on_borrar_p_pressed_slot_2)
-	if btn_borrar_3: btn_borrar_3.pressed.connect(_on_borrar_p_pressed_slot_3)
+	btn_return.pressed.connect(_on_return_pressed)
+	# Los botones no tienen señales conectadas en la escena: se conectan aquí
+	for i in range(1, 4):
+		var slot: Control = slots_box.get_node("Slot%d" % i)
+		slot.get_node("BottomFrame/BtnAction").pressed.connect(_handle_select_slot.bind(i))
+		slot.get_node("TopRightFrame/BtnDelete").pressed.connect(_handle_delete_slot.bind(i))
 	update_all_slots_ui()
 
 func update_all_slots_ui() -> void:
-	_update_slot_label(1, label_slot_1)
-	_update_slot_label(2, label_slot_2)
-	_update_slot_label(3, label_slot_3)
+	for i in range(1, 4):
+		_update_slot(i)
 
-func _update_slot_label(slot_num: int, label_node: Label) -> void:
-	if label_node == null:
-		return
-		
-	if SaveLoad.has_save(slot_num):
-		label_node.text = "Slot " + str(slot_num) + " - Ocupado"
+func _update_slot(slot_num: int) -> void:
+	var slot: Control = slots_box.get_node("Slot%d" % slot_num)
+	var status: Label = slot.get_node("TopLeftFrame/SlotStatus")
+	var nivel: Label = slot.get_node("BottomFrame/InfoContainer/LevelLabel")
+	var meta: Label = slot.get_node("BottomFrame/InfoContainer/MetaLabel")
+	var btn: TextureButton = slot.get_node("BottomFrame/BtnAction")
+	var borrar: TextureButton = slot.get_node("TopRightFrame/BtnDelete")
+	
+	var ocupado: bool = SaveLoad.has_save(slot_num)
+	if ocupado:
+		var d: Dictionary = SaveLoad.get_slot_info(slot_num)
+		status.text = "OCUPADO"
+		nivel.text = str(d.get("level_name", "Nivel 1"))
+		meta.text = "%s | Tiempo: %s" % [d.get("save_date", "--"), d.get("play_time", "00:00")]
 	else:
-		label_node.text = "VACÍO"
-
-# --- MÉTODOS DE BOTONES ---
-
-func _on_selecc_p_pressed_slot_1() -> void: _handle_select_slot(1)
-func _on_selecc_p_pressed_slot_2() -> void: _handle_select_slot(2)
-func _on_selecc_p_pressed_slot_3() -> void: _handle_select_slot(3)
+		status.text = "VACÍO"
+		nivel.text = "Ranura disponible"
+		meta.text = "Sin partida guardada"
+	
+	borrar.visible = ocupado
+	
+	# El botón cambia según el modo: Nueva Partida o Continuar Partida
+	var nueva: bool = SaveLoad.es_nueva_partida
+	btn.texture_normal = load(TEX_NUEVA if nueva else TEX_CONT)
+	btn.texture_pressed = load(TEX_NUEVA_P if nueva else TEX_CONT_P)
+	btn.disabled = (not nueva) and (not ocupado)
+	btn.modulate = Color(1, 1, 1, 0.4) if btn.disabled else Color.WHITE
 
 func _handle_select_slot(slot_num: int) -> void:
 	if SaveLoad.es_nueva_partida:
-		# Nueva partida: reinicia datos, crea el guardado y entra al juego
 		SaveLoad.new_game(slot_num)
 		get_tree().change_scene_to_file(SaveLoad.ESCENA_JUEGO)
 	else:
-		# Continuar: solo si el slot tiene una partida guardada
 		if not SaveLoad.has_save(slot_num):
 			return
 		if SaveLoad.load_game(slot_num):
 			get_tree().change_scene_to_file(SaveLoad.ESCENA_JUEGO)
-
-func _on_borrar_p_pressed_slot_1() -> void: _handle_delete_slot(1)
-func _on_borrar_p_pressed_slot_2() -> void: _handle_delete_slot(2)
-func _on_borrar_p_pressed_slot_3() -> void: _handle_delete_slot(3)
 
 func _handle_delete_slot(slot_num: int) -> void:
 	SaveLoad.delete_slot(slot_num)
 	update_all_slots_ui()
 
 func _on_return_pressed() -> void:
-	get_tree().change_scene_to_file("res://Menu Inicio.tscn")
+	get_tree().change_scene_to_file(ESCENA_MENU)

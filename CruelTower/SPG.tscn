@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bhaii1o1500vl" path="res://Iconos/SaveLoadBotones/BotonBorrarP.png" id="8_del_p"]
 [ext_resource type="Texture2D" uid="uid://b2m635kbjsbc1" path="res://Iconos/BotonesInicio/Boton CP.png" id="9_cp"]
 [ext_resource type="Texture2D" uid="uid://b6fwbx2hafcv3" path="res://Iconos/Botones presionados/Boton CPP.png" id="10_cpp"]
+[ext_resource type="Texture2D" uid="uid://cbtumeq4x7kwk" path="res://Cadena.png" id="11_chain"]
+[ext_resource type="Texture2D" uid="uid://dkiwenfvrh7lh" path="res://VIGA.png" id="12_viga"]
 
 [sub_resource type="Gradient" id="Gradient_vignette"]
 offsets = PackedFloat32Array(0, 0.45, 0.8, 1)
@@ -140,6 +142,7 @@ offset_top = 135.0
 offset_bottom = 243.0
 grow_horizontal = 2
 mouse_filter = 2
+texture = ExtResource("12_viga")
 expand_mode = 1
 stretch_mode = 5
 
@@ -248,6 +251,7 @@ offset_top = -5.0
 offset_right = 97.0
 offset_bottom = 168.0
 mouse_filter = 2
+texture = ExtResource("11_chain")
 stretch_mode = 1
 
 [node name="ChainRight" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1029384902]
@@ -258,6 +262,7 @@ offset_top = -5.0
 offset_right = 318.0
 offset_bottom = 168.0
 mouse_filter = 2
+texture = ExtResource("11_chain")
 stretch_mode = 1
 
 [node name="BoardTexture" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot1" unique_id=1272584866]
@@ -371,6 +376,7 @@ offset_top = -5.0
 offset_right = 97.0
 offset_bottom = 168.0
 mouse_filter = 2
+texture = ExtResource("11_chain")
 stretch_mode = 1
 
 [node name="ChainRight" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1029384904]
@@ -381,6 +387,7 @@ offset_top = -5.0
 offset_right = 318.0
 offset_bottom = 168.0
 mouse_filter = 2
+texture = ExtResource("11_chain")
 stretch_mode = 1
 
 [node name="BoardTexture" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot2" unique_id=1913481067]
@@ -494,6 +501,7 @@ offset_top = -5.0
 offset_right = 97.0
 offset_bottom = 168.0
 mouse_filter = 2
+texture = ExtResource("11_chain")
 stretch_mode = 1
 
 [node name="ChainRight" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=1029384906]
@@ -504,6 +512,7 @@ offset_top = -5.0
 offset_right = 318.0
 offset_bottom = 168.0
 mouse_filter = 2
+texture = ExtResource("11_chain")
 stretch_mode = 1
 
 [node name="BoardTexture" type="TextureRect" parent="MainMargin/MainVBox/SlotsCenter/SlotsHBox/Slot3" unique_id=99894839]

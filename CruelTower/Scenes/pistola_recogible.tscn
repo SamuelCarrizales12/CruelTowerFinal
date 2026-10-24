@@ -1,10 +1,19 @@
-[gd_scene format=3 uid="uid://bdovv4htpce1l"]
+[gd_scene format=3 uid="uid://b33ptl27c4g4u"]
 
 [ext_resource type="Script" uid="uid://covb8sjq717bj" path="res://Scripts/pistola_recogible.gd" id="1_4gtqk"]
+[ext_resource type="Texture2D" uid="uid://5sl73rdre5hl" path="res://Recursos/assets2.png" id="2_1njug"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bjg7l"]
+size = Vector3(6.4298706, 6.1120605, 6.40559)
 
 [node name="PistolaRecogible" type="StaticBody3D" unique_id=1144396916]
 script = ExtResource("1_4gtqk")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=532278886]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+billboard = 1
+texture = ExtResource("2_1njug")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1527628493]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.04269409, -0.07409668, -0.0009326935)
+shape = SubResource("BoxShape3D_bjg7l")

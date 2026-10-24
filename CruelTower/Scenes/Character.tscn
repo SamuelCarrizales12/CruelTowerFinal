@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://jior2nldywqg"]
+[gd_scene format=3 uid="uid://dqjxnkcowvclp"]
 
 [ext_resource type="Script" uid="uid://ctaghshaqkag5" path="res://Scripts/character.gd" id="1_oolk3"]
 [ext_resource type="Texture2D" uid="uid://jv8thcbtqm3b" path="res://Recursos/charact.png" id="2_7ig0a"]
@@ -45,5 +45,16 @@ offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=993495612]
+visible = false
+offset_left = 518.0
+offset_top = 402.0
+offset_right = 763.0
+offset_bottom = 425.0
+text = "\"Presiona [ E ] para 
+interactuar\""
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1787889576]

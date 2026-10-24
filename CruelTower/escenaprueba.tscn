@@ -1,13 +1,10 @@
 [gd_scene format=3 uid="uid://b3wdss57u3gxq"]
 
 [ext_resource type="PackedScene" uid="uid://cv4yr0g2n0oq4" path="res://Scenes/Mapa1.tscn" id="1_ymplu"]
-[ext_resource type="PackedScene" uid="uid://jior2nldywqg" path="res://Scenes/Character.tscn" id="2_xf22r"]
+[ext_resource type="PackedScene" uid="uid://dqjxnkcowvclp" path="res://Scenes/Character.tscn" id="2_xf22r"]
 [ext_resource type="PackedScene" uid="uid://cvdqn5afy4b45" path="res://Scenes/enemigo1.tscn" id="3_xf22r"]
-<<<<<<< HEAD
-[ext_resource type="PackedScene" uid="uid://bdovv4htpce1l" path="res://Scenes/pistola_recogible.tscn" id="4_stini"]
+[ext_resource type="PackedScene" uid="uid://b33ptl27c4g4u" path="res://Scenes/pistola_recogible.tscn" id="4_stini"]
 [ext_resource type="AudioStream" uid="uid://bjm34xb1cf808" path="res://Soundtrack/mondamusic-mystery-dark-589191.mp3" id="5_r05mj"]
-=======
->>>>>>> parent of 239b18a (interacción con objetos)
 
 [sub_resource type="Environment" id="Environment_0kfr3"]
 ssao_radius = 0.48
@@ -44,7 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.236, 0.8015846, -13.389904
 
 [node name="Enemigo1" parent="." unique_id=1881378344 instance=ExtResource("3_xf22r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.34607, 0.7934792, -10.890958)
-<<<<<<< HEAD
 
 [node name="PistolaRecogible" parent="." unique_id=1144396916 instance=ExtResource("4_stini")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5457257, 1.2722185, -1.9714211)
@@ -52,5 +48,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5457257, 1.2722185, -1.971
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=416056995]
 stream = ExtResource("5_r05mj")
 autoplay = true
-=======
->>>>>>> parent of 239b18a (interacción con objetos)
