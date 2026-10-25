@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://jv8thcbtqm3b" path="res://Recursos/charact.png" id="2_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://mhadc456rfw3" path="res://Recursos/modelos 3D/skin2_0.png" id="2_677pu"]
 [ext_resource type="AudioStream" uid="uid://cdr8svhpsw57d" path="res://Recursos/Sonidos/scottishperson-sound-effects-single-gun-shot-247124.mp3" id="4_v7dgu"]
+[ext_resource type="AudioStream" uid="uid://d0v2t1u8q07bk" path="res://Recursos/Sonidos/dragon-studio-gun-reload-2-504027.mp3" id="5_vdqda"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c2oq"]
 resource_name = "material_0"
@@ -551,7 +552,20 @@ theme_override_styles/background = SubResource("StyleBoxFlat_ms6xa")
 value = 100.0
 show_percentage = false
 
+[node name="MensajeRecarga" type="Label" parent="CanvasLayer" unique_id=1593119766]
+visible = false
+offset_left = 536.0
+offset_top = 368.0
+offset_right = 746.0
+offset_bottom = 391.0
+text = "Presiona [ R ] para recargar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Node3D" type="Node3D" parent="." unique_id=1787889576]
 
 [node name="SonidoDisparo" type="AudioStreamPlayer3D" parent="." unique_id=2141007404]
 stream = ExtResource("4_v7dgu")
+
+[node name="SonidoRecarga" type="AudioStreamPlayer3D" parent="." unique_id=1513309557]
+stream = ExtResource("5_vdqda")

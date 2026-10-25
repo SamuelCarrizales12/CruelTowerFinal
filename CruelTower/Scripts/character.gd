@@ -34,6 +34,9 @@ var vector_retroceso := Vector3.ZERO
 var coleccionables_obtenidos := []
 var esta_muerto := false
 
+var cabeza_bloqueada: bool = false
+@onready var mensaje_recarga = $CanvasLayer/MensajeRecarga
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	barra_vida.max_value = salud_maxima
@@ -157,7 +160,24 @@ func _physics_process(delta: float) -> void:
 		texto_municion.visible = false
 
 func disparar():
+	if cabeza_bloqueada:
+		return
 	if municion_actual <= 0:
+		cabeza_bloqueada = true
+		
+		mensaje_recarga.visible = true
+		var rotacion_y_original = cabeza.rotation.y
+		var tweeen = get_tree().create_tween()
+		
+		tweeen.tween_property(cabeza, "rotation:y", deg_to_rad(5), 0.1)
+		tweeen.tween_property(cabeza, "rotation:y", deg_to_rad(-5), 0.1)
+		tweeen.tween_property(cabeza, "rotation:y", 0.0, 0.1)
+		tweeen.tween_callback(func(): 
+			cabeza.rotation.y = rotacion_y_original
+			cabeza_bloqueada = false
+		)
+		await get_tree().create_timer(1.5).timeout
+		mensaje_recarga.visible = false
 		print("Cargador vacío")
 		return
 		
@@ -191,8 +211,10 @@ func recargar():
 	if municion_actual == tamano_cargador or municion_reserva <= 0:
 		return
 	
+	$SonidoRecarga.play()
 	recargando = true
 	Telemetria.evento("reload")
+	
 	print("Recargando...")
 	
 	await get_tree().create_timer(1.5).timeout
