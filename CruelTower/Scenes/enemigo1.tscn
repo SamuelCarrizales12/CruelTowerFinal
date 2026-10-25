@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d3fp3v2b4bxp" path="res://Recursos/explosion5.png" id="4_6r2qo"]
 [ext_resource type="Texture2D" uid="uid://brpgnqarmi4q5" path="res://Recursos/explosion6.png" id="5_xxknp"]
 [ext_resource type="Texture2D" uid="uid://bgigx3bm5nca7" path="res://Recursos/explosion7.png" id="6_3wm0f"]
+[ext_resource type="AudioStream" uid="uid://cww8xl8ybcaaq" path="res://Recursos/Sonidos/webdesignbyterry-cyber-10071.mp3" id="10_jplxd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ms6xa"]
 radius = 0.54117364
@@ -32,3 +33,8 @@ texture = ExtResource("2_7rc34")
 shape = SubResource("SphereShape3D_ms6xa")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1655480090]
+
+[node name="CyberRadio" type="AudioStreamPlayer3D" parent="." unique_id=771138088]
+stream = ExtResource("10_jplxd")
+unit_size = 5.0
+max_distance = 24.0

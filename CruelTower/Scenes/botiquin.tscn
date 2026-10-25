@@ -1,18 +1,17 @@
 [gd_scene format=3 uid="uid://dpovrp3x37vd5"]
 
 [ext_resource type="Script" uid="uid://8y2wwvkrmwq2" path="res://Scripts/botiquin.gd" id="1_ieeqc"]
-[ext_resource type="Texture2D" uid="uid://dba4aeublam6m" path="res://Recursos/explosion4.png" id="2_x75c5"]
+[ext_resource type="PackedScene" uid="uid://bu8rq5gv80w84" path="res://Recursos/modelos 3D/pocion.glb" id="2_ieeqc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ms6xa"]
+size = Vector3(1, 1.4853516, 1)
 
 [node name="Botiquin" type="StaticBody3D" unique_id=1130389143]
 script = ExtResource("1_ieeqc")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=489706362]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-billboard = 1
-texture = ExtResource("2_x75c5")
+[node name="blockbench_export" parent="." unique_id=722628054 instance=ExtResource("2_ieeqc")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1916099212]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.14603843, 0)
 shape = SubResource("BoxShape3D_ms6xa")

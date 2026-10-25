@@ -4,11 +4,13 @@ const SPEED = 2.5
 const SPEED_RUN = 3.5
 const MOUSE_SENSITIVITY = 0.003
 
-@onready var pivot: Node3D = $CameraPivot
-@onready var spring_arm = $CameraPivot/SpringArm3D
-@onready var raycast = $CameraPivot/SpringArm3D/Camera3D/RayCast3D
-@onready var camara = $CameraPivot/SpringArm3D/Camera3D
+@onready var pivot: Node3D = $blockbench_export/Waist/Head2/CameraPivot
+@onready var spring_arm = $blockbench_export/Waist/Head2/CameraPivot/SpringArm3D
+@onready var raycast = $blockbench_export/Waist/Head2/CameraPivot/SpringArm3D/Camera3D/RayCast3D
+@onready var camara = $blockbench_export/Waist/Head2/CameraPivot/SpringArm3D/Camera3D
 @onready var mirilla = $CanvasLayer/ColorRect
+
+@onready var cabeza = $blockbench_export/Waist/Head2
 
 const FOV_NORMAL = 75.0
 const FOV_APUNTADO = 40.0
@@ -46,9 +48,11 @@ func _unhandled_input(event):
 		return
 		
 	if event is InputEventMouseMotion:
-		pivot.rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
-		spring_arm.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
-		spring_arm.rotation.x = clamp(spring_arm.rotation.x, deg_to_rad(-75), deg_to_rad(45))
+		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
+		#spring_arm.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
+		cabeza.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
+		spring_arm.rotation.x = clamp(spring_arm.rotation.x, deg_to_rad(-70), deg_to_rad(70))
+		cabeza.rotation.x = clamp(cabeza.rotation.x, deg_to_rad(-70), deg_to_rad(70))
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -60,7 +64,7 @@ func _physics_process(delta: float) -> void:
 			velocidad_actual = SPEED_RUN
 			
 		var input_dir := Input.get_vector("mover_izquierda", "mover_derecha", "mover_adelante", "mover_atras")
-		var direction := (pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 		if direction:
 			velocity.x = direction.x * velocidad_actual
@@ -161,6 +165,8 @@ func disparar():
 	Telemetria.evento("shot", {"ammo": municion_actual})
 	esta_disparando = true
 	
+	$SonidoDisparo.play(0.5)
+	
 	var direccion_retroceso = pivot.transform.basis.z.normalized()
 	velocity.x = direccion_retroceso.x * 10.0
 	velocity.z = direccion_retroceso.z * 10.0
@@ -202,7 +208,7 @@ func recargar():
 	recargando = false
 	print("Arma lista. Munición: ", municion_actual, "/", municion_reserva)
 
-func recibir_dano(cantidad: int, direccion_impacto: Vector3 = Vector3.ZERO, _atacante: Node3D = null):
+func recibir_dano(cantidad: int, _direccion_impacto: Vector3 = Vector3.ZERO, _atacante: Node3D = null):
 	if esta_muerto:
 		return
 	
@@ -215,15 +221,16 @@ func recibir_dano(cantidad: int, direccion_impacto: Vector3 = Vector3.ZERO, _ata
 		fuente = str(_atacante.get("nombre_manada"))
 	Telemetria.evento("damage_taken", {"amount": cantidad, "hp": salud_actual, "source": fuente})
 	
-	if direccion_impacto != Vector3.ZERO:
-		vector_retroceso = direccion_impacto * 3.0 
-		velocity.y = 5.0 
+	# --- SISTEMA DE RETROCESO CORREGIDO ---
+	var hacia_atras = transform.basis.z.normalized()
+	
+	vector_retroceso = hacia_atras * 4.0 
+	velocity.y = 5.0 
 	
 	if salud_actual <= 0:
 		print("¡ESTÁS MUERTO!")
 		esta_muerto = true
 		Telemetria.muerte(fuente)
-		# Opcional: reiniciar el nivel para poder volver a intentarlo (y medir más muertes):
 		# get_tree().create_timer(1.5).timeout.connect(func(): get_tree().reload_current_scene())
 
 func curar(cantidad: int):

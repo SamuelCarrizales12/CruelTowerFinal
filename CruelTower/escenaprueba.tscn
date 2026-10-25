@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c3u438pnauiuo" path="res://Scenes/caja_municion.tscn" id="5_r05mj"]
 [ext_resource type="PackedScene" uid="uid://bfyywu5b1345h" path="res://Scenes/objeto_coleccionable.tscn" id="6_q2kgp"]
 [ext_resource type="Texture2D" uid="uid://be5hd0qkh0nvn" path="res://Recursos/Scary2.png" id="7_14pon"]
+[ext_resource type="PackedScene" uid="uid://dpovrp3x37vd5" path="res://Scenes/botiquin.tscn" id="8_q2kgp"]
 
 [sub_resource type="Environment" id="Environment_0kfr3"]
 ssao_radius = 0.48
@@ -22,7 +23,7 @@ fog_height_density = -0.3371
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="Node3D" parent="." unique_id=1787889576 instance=ExtResource("2_xf22r")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -3, 3, 3)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -3, 3.0845692, 3)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1716030500]
 transform = Transform3D(-0.40467364, -0.5626635, -0.7208668, 0.49654013, -0.7971655, 0.34347463, -0.7679108, -0.21894419, 0.6019771, -5.778261, 0, 2.9671757)
@@ -86,3 +87,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4720638, 0.19132137, -3.96
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.564873, 1.1826999, -12.016678)
 nombre_objeto = "mona china 1"
 imagen_objeto = ExtResource("7_14pon")
+
+[node name="Botiquin" parent="." unique_id=1130389143 instance=ExtResource("8_q2kgp")]
+transform = Transform3D(0.7494543, 0, -0.662056, 0, 1, 0, 0.662056, 0, 0.7494543, 0.3175189, 0.13400006, -9.432624)

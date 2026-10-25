@@ -35,6 +35,7 @@ var cooldown_ataque := 0.0
 func _ready():
 	# El enemigo se une automáticamente a su mini-manada al aparecer en el mundo
 	add_to_group(nombre_manada)
+	$CyberRadio.play()
 
 func alertar(quien_disparo: Node3D):
 	if persiguiendo:
