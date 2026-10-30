@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b_enemigo_coat"]
+
+[ext_resource type="Script" path="res://Scripts/animacion_idle.gd" id="1_idle"]
+[ext_resource type="PackedScene" path="res://Recursos/Enemigos/Witchtober Day 10 Coat.glb" id="2_model"]
+[ext_resource type="Material" path="res://Recursos/Enemigos/material_color_vertice.tres" id="3_mat"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_coat"]
+radius = 0.35
+height = 1.7
+
+[node name="EnemigoCoat" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_coat")
+
+[node name="Visual" type="Node3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+script = ExtResource("1_idle")
+levitacion_activa = true
+amplitud_levitacion = 0.08
+velocidad_levitacion = 2.2
+balanceo_activo = true
+amplitud_balanceo_deg = 3.0
+velocidad_balanceo = 2.0
+respiracion_activa = true
+factor_respiracion = 0.02
+velocidad_respiracion = 1.8
+activar_colores_vertice = false
+
+[node name="Model" parent="Visual" instance=ExtResource("2_model")]
+
+[node name="node_6" parent="Visual/Model/group_0" index="0"]
+material_override = ExtResource("3_mat")
+
+[node name="node_7" parent="Visual/Model/group_1" index="0"]
+material_override = ExtResource("3_mat")
+
+[node name="node_8" parent="Visual/Model/group_1" index="1"]
+material_override = ExtResource("3_mat")
+
+[node name="node_9" parent="Visual/Model/group_2" index="0"]
+material_override = ExtResource("3_mat")
+
+[node name="node_10" parent="Visual/Model/group_3" index="0"]
+material_override = ExtResource("3_mat")
+
+[node name="node_11" parent="Visual/Model/group_4" index="0"]
+material_override = ExtResource("3_mat")
+
+[node name="node_12" parent="Visual/Model/group_5" index="0"]
+material_override = ExtResource("3_mat")
+
+[editable path="Visual/Model"]

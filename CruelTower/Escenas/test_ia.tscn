@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://test_ia_scene"]
+
+[ext_resource type="Script" path="res://Escenas/test_ia.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cv4yr0g2n0oq4" path="res://Scenes/Mapa1.tscn" id="2_mapa"]
+[ext_resource type="PackedScene" uid="uid://jior2nldywqg" path="res://Scenes/Character.tscn" id="3_jugador"]
+[ext_resource type="PackedScene" uid="uid://b_enemigo_scorp" path="res://Escenas/Enemigos/enemigo_scorpion.tscn" id="4_scorp"]
+[ext_resource type="PackedScene" uid="uid://b_enemigo_spider" path="res://Escenas/Enemigos/enemigo_spider.tscn" id="5_spider"]
+
+[sub_resource type="Environment" id="Environment_test"]
+ambient_light_source = 2
+ambient_light_color = Color(0.42, 0.42, 0.48, 1)
+tonemap_mode = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.08, 0.06, 0.05, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.42, 0.3, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="SystemFont" id="SystemFont_ui"]
+font_names = PackedStringArray("Georgia", "Palatino Linotype", "Times New Roman", "serif")
+
+[sub_resource type="LabelSettings" id="LabelSettings_titulo"]
+font = SubResource("SystemFont_ui")
+font_size = 15
+font_color = Color(0.95, 0.88, 0.72, 1)
+outline_size = 3
+outline_color = Color(0.05, 0.03, 0.02, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_texto"]
+font = SubResource("SystemFont_ui")
+font_size = 13
+font_color = Color(0.88, 0.85, 0.78, 1)
+outline_size = 2
+outline_color = Color(0.05, 0.03, 0.02, 1)
+
+[node name="TestIA" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_test")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 20, 0)
+light_color = Color(1, 0.96, 0.9, 1)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="Mapa1" parent="." instance=ExtResource("2_mapa")]
+
+[node name="Jugador" parent="." instance=ExtResource("3_jugador")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.5, 2)
+
+[node name="PatrullaEscorpion" type="Node3D" parent="."]
+
+[node name="Punto1" type="Node3D" parent="PatrullaEscorpion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, -6)
+
+[node name="Punto2" type="Node3D" parent="PatrullaEscorpion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, -14)
+
+[node name="Punto3" type="Node3D" parent="PatrullaEscorpion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, -2)
+
+[node name="EnemigoScorpion" parent="." instance=ExtResource("4_scorp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, -6)
+puntos_patrulla = [NodePath("../PatrullaEscorpion/Punto1"), NodePath("../PatrullaEscorpion/Punto2"), NodePath("../PatrullaEscorpion/Punto3")]
+grupo_alerta = "manada_1"
+
+[node name="PatrullaArana" type="Node3D" parent="."]
+
+[node name="Punto1" type="Node3D" parent="PatrullaArana"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 2)
+
+[node name="Punto2" type="Node3D" parent="PatrullaArana"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 2)
+
+[node name="Punto3" type="Node3D" parent="PatrullaArana"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, 1)
+
+[node name="EnemigoSpider" parent="." instance=ExtResource("5_spider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 2)
+puntos_patrulla = [NodePath("../PatrullaArana/Punto1"), NodePath("../PatrullaArana/Punto2"), NodePath("../PatrullaArana/Punto3")]
+grupo_alerta = "manada_1"
+
+[node name="CamaraCenital" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, -6, 12, 4)
+current = true
+fov = 68.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="UI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 500.0
+offset_bottom = 240.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="UI/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="UI/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblTitulo" type="Label" parent="UI/Panel/Margin/VBox"]
+layout_mode = 2
+text = "PRUEBA DE IA Y MÁQUINA DE ESTADOS"
+label_settings = SubResource("LabelSettings_titulo")
+
+[node name="LblInstrucciones" type="Label" parent="UI/Panel/Margin/VBox"]
+layout_mode = 2
+text = "[V] Cámara  [1] Tras pared  [2] Cono visión  [3] Disparo  [4] Huir  [5] Aturdir  [6] Morir
+[K] Forzar Ataque cercano   [J] Alternar Modo Inmune"
+label_settings = SubResource("LabelSettings_texto")
+
+[node name="HSeparator" type="HSeparator" parent="UI/Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="LblFPS" type="Label" parent="UI/Panel/Margin/VBox"]
+layout_mode = 2
+text = "FPS: 60"
+label_settings = SubResource("LabelSettings_texto")
+
+[node name="LblEscorpion" type="Label" parent="UI/Panel/Margin/VBox"]
+layout_mode = 2
+text = "Escorpión: PATRULLA"
+label_settings = SubResource("LabelSettings_texto")
+
+[node name="LblArana" type="Label" parent="UI/Panel/Margin/VBox"]
+layout_mode = 2
+text = "Araña: PATRULLA"
+label_settings = SubResource("LabelSettings_texto")
+
+[node name="LblEvento" type="Label" parent="UI/Panel/Margin/VBox"]
+layout_mode = 2
+text = "Evento: Listo"
+label_settings = SubResource("LabelSettings_texto")
+
+[node name="LblCamara" type="Label" parent="UI/Panel/Margin/VBox"]
+layout_mode = 2
+text = "Cámara: Cenital"
+label_settings = SubResource("LabelSettings_texto")

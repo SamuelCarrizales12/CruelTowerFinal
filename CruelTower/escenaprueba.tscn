@@ -2,9 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://cv4yr0g2n0oq4" path="res://Scenes/Mapa1.tscn" id="1_ymplu"]
 [ext_resource type="PackedScene" uid="uid://jior2nldywqg" path="res://Scenes/Character.tscn" id="2_xf22r"]
-[ext_resource type="PackedScene" uid="uid://cvdqn5afy4b45" path="res://Scenes/enemigo1.tscn" id="3_xf22r"]
+[ext_resource type="PackedScene" uid="uid://b_enemigo_spider" path="res://Escenas/Enemigos/enemigo_spider.tscn" id="3_spider"]
 [ext_resource type="PackedScene" uid="uid://bdovv4htpce1l" path="res://Scenes/pistola_recogible.tscn" id="4_stini"]
 [ext_resource type="AudioStream" uid="uid://bjm34xb1cf808" path="res://Soundtrack/mondamusic-mystery-dark-589191.mp3" id="5_r05mj"]
+[ext_resource type="PackedScene" uid="uid://b_enemigo_acechador" path="res://Escenas/Enemigos/enemigo_acechador.tscn" id="6_acechador"]
 
 [sub_resource type="Environment" id="Environment_0kfr3"]
 ssao_radius = 0.48
@@ -33,14 +34,71 @@ light_angular_distance = 77.7
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1401163217]
 environment = SubResource("Environment_0kfr3")
 
-[node name="Node3D2" parent="." unique_id=1655480090 instance=ExtResource("3_xf22r")]
+[node name="PatrullaEscorpion1" type="Node3D" parent="."]
+
+[node name="P1_1" type="Node3D" parent="PatrullaEscorpion1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.5, -12)
 
-[node name="Node3D3" parent="." unique_id=2141204174 instance=ExtResource("3_xf22r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.236, 0.8015846, -13.389904)
+[node name="P1_2" type="Node3D" parent="PatrullaEscorpion1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.5, -9.8)
 
-[node name="Enemigo1" parent="." unique_id=1881378344 instance=ExtResource("3_xf22r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.34607, 0.7934792, -10.890958)
+[node name="P1_3" type="Node3D" parent="PatrullaEscorpion1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.5, -12)
+
+[node name="PatrullaEscorpion2" type="Node3D" parent="."]
+
+[node name="P2_1" type="Node3D" parent="PatrullaEscorpion2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2, 0.5, -13.4)
+
+[node name="P2_2" type="Node3D" parent="PatrullaEscorpion2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2, 0.5, -9.8)
+
+[node name="P2_3" type="Node3D" parent="PatrullaEscorpion2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0.5, -13.4)
+
+[node name="PatrullaEscorpion3" type="Node3D" parent="."]
+
+[node name="P3_1" type="Node3D" parent="PatrullaEscorpion3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.35, 0.5, -10.9)
+
+[node name="P3_2" type="Node3D" parent="PatrullaEscorpion3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.5, -10.5)
+
+[node name="P3_3" type="Node3D" parent="PatrullaEscorpion3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.35, 0.5, -14)
+
+[node name="EnemigoSpider1" parent="." instance=ExtResource("3_spider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.5, -12)
+puntos_patrulla = [NodePath("../PatrullaEscorpion1/P1_1"), NodePath("../PatrullaEscorpion1/P1_2"), NodePath("../PatrullaEscorpion1/P1_3")]
+grupo_alerta = "manada_1"
+
+[node name="EnemigoSpider2" parent="." instance=ExtResource("3_spider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.236, 0.5, -13.39)
+puntos_patrulla = [NodePath("../PatrullaEscorpion2/P2_1"), NodePath("../PatrullaEscorpion2/P2_2"), NodePath("../PatrullaEscorpion2/P2_3")]
+grupo_alerta = "manada_1"
+
+[node name="EnemigoSpider3" parent="." instance=ExtResource("3_spider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.346, 0.5, -10.89)
+puntos_patrulla = [NodePath("../PatrullaEscorpion3/P3_1"), NodePath("../PatrullaEscorpion3/P3_2"), NodePath("../PatrullaEscorpion3/P3_3")]
+grupo_alerta = "manada_1"
+
+[node name="PatrullaAcechador" type="Node3D" parent="."]
+
+[node name="PA_1" type="Node3D" parent="PatrullaAcechador"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 0.5, 13.5)
+
+[node name="PA_2" type="Node3D" parent="PatrullaAcechador"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.5, 15)
+
+[node name="PA_3" type="Node3D" parent="PatrullaAcechador"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 14.5)
+
+[node name="PA_4" type="Node3D" parent="PatrullaAcechador"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.5, 6.5)
+
+[node name="EnemigoAcechador" parent="." instance=ExtResource("6_acechador")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 0.5, 13.5)
+puntos_patrulla = [NodePath("../PatrullaAcechador/PA_1"), NodePath("../PatrullaAcechador/PA_2"), NodePath("../PatrullaAcechador/PA_3"), NodePath("../PatrullaAcechador/PA_4")]
 
 [node name="PistolaRecogible" parent="." unique_id=1144396916 instance=ExtResource("4_stini")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5457257, 1.2722185, -1.9714211)

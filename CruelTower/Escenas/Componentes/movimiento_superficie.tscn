@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://comp_movimiento_sup"]
+
+[ext_resource type="Script" path="res://Scripts/movimiento_superficie.gd" id="1_sup"]
+
+[node name="MovimientoSuperficie" type="Node"]
+script = ExtResource("1_sup")

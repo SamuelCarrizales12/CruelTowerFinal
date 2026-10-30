@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://b_enemigo_scorp"]
+
+[ext_resource type="Script" path="res://Scripts/enemigo_ia.gd" id="1_ia"]
+[ext_resource type="Script" path="res://Scripts/animacion_idle.gd" id="1_idle"]
+[ext_resource type="PackedScene" path="res://Recursos/Enemigos/aescripts_motionstack_download_latest_2026.glb" id="2_model"]
+[ext_resource type="PackedScene" uid="uid://comp_movimiento_nav" path="res://Escenas/Componentes/movimiento_nav.tscn" id="3_nav"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_scorp"]
+radius = 0.5
+height = 1.0
+
+[node name="EnemigoScorpion" type="CharacterBody3D"]
+collision_layer = 5
+collision_mask = 1
+script = ExtResource("1_ia")
+vel_patrulla = 1.5
+vel_persecucion = 3.0
+vel_busqueda = 2.0
+rango_vision = 12.0
+angulo_vision = 90.0
+rango_oido = 8.0
+altura_ojos = 0.4
+grupo_alerta = "manada_1"
+dano = 10.0
+distancia_ataque = 1.6
+alcance_golpe = 2.0
+angulo_golpe = 60.0
+tiempo_preparacion = 0.35
+tiempo_recuperacion = 0.5
+cooldown_ataque = 0.8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_scorp")
+
+[node name="Visual" type="Node3D" parent="."]
+transform = Transform3D(52, 0, 0, 0, 52, 0, 0, 0, 52, 0, 0, 0)
+script = ExtResource("1_idle")
+levitacion_activa = false
+amplitud_levitacion = 0.0
+balanceo_activo = true
+amplitud_balanceo_deg = 0.8
+velocidad_balanceo = 1.0
+respiracion_activa = true
+factor_respiracion = 0.01
+velocidad_respiracion = 1.2
+activar_colores_vertice = false
+
+[node name="Model" parent="Visual" instance=ExtResource("2_model")]
+
+[node name="MovimientoNav" parent="." instance=ExtResource("3_nav")]

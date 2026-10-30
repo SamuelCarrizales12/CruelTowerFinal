@@ -2,10 +2,56 @@
 
 [ext_resource type="Script" uid="uid://ctaghshaqkag5" path="res://Scripts/character.gd" id="1_oolk3"]
 [ext_resource type="Texture2D" uid="uid://jv8thcbtqm3b" path="res://Recursos/charact.png" id="2_7ig0a"]
+[ext_resource type="Shader" path="res://Recursos/vignette_damage.gdshader" id="3_shader"]
+[ext_resource type="PackedScene" uid="uid://c_game_over_scene" path="res://Escenas/game_over.tscn" id="4_gameover"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ms6xa"]
 radius = 0.22851563
 height = 2.2105923
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_danio"]
+shader = ExtResource("3_shader")
+shader_parameter/vignette_color = Color(0.72, 0.05, 0.05, 1)
+shader_parameter/vignette_intensity = 0.0
+shader_parameter/flash_intensity = 0.0
+
+[sub_resource type="SystemFont" id="SystemFont_hud"]
+font_names = PackedStringArray("Georgia", "Palatino Linotype", "Times New Roman", "serif")
+
+[sub_resource type="LabelSettings" id="LabelSettings_hud_titulo"]
+font = SubResource("SystemFont_hud")
+font_size = 14
+font_color = Color(0.91, 0.851, 0.71, 1)
+outline_size = 4
+outline_color = Color(0.063, 0.039, 0.024, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hud_val"]
+font = SubResource("SystemFont_hud")
+font_size = 13
+font_color = Color(0.91, 0.851, 0.71, 1)
+outline_size = 3
+outline_color = Color(0.063, 0.039, 0.024, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_bg"]
+bg_color = Color(0.09, 0.067, 0.051, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.49, 0.435, 0.365, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_fill"]
+bg_color = Color(0.55, 0.114, 0.114, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1198284294]
 script = ExtResource("1_oolk3")
@@ -32,6 +78,15 @@ target_position = Vector3(0, 0, -50)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1387791216]
 
+[node name="DanioOverlay" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_danio")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=96692821]
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,5 +111,59 @@ text = "\"Presiona [ E ] para
 interactuar\""
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HUDVida" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -68.0
+offset_right = 272.0
+offset_bottom = -28.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="LabelTitulo" type="Label" parent="CanvasLayer/HUDVida"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.55
+anchor_bottom = -0.05
+offset_left = 2.0
+grow_vertical = 2
+text = "VIDA"
+label_settings = SubResource("LabelSettings_hud_titulo")
+vertical_alignment = 1
+
+[node name="LabelValor" type="Label" parent="CanvasLayer/HUDVida"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = -0.55
+anchor_right = 1.0
+anchor_bottom = -0.05
+offset_right = -2.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "100 / 100"
+label_settings = SubResource("LabelSettings_hud_val")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/HUDVida"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hud_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hud_fill")
+value = 100.0
+show_percentage = false
+
+[node name="GameOver" parent="." instance=ExtResource("4_gameover")]
+
+[node name="AudioDanio" type="AudioStreamPlayer" parent="."]
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1787889576]

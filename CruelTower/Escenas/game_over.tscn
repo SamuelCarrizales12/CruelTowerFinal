@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://c_game_over_scene"]
+
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_script"]
+
+[sub_resource type="SystemFont" id="SystemFont_medieval"]
+font_names = PackedStringArray("Georgia", "Palatino Linotype", "Times New Roman", "serif")
+
+[sub_resource type="LabelSettings" id="LabelSettings_titulo"]
+font = SubResource("SystemFont_medieval")
+font_size = 68
+font_color = Color(0.62, 0.106, 0.106, 1)
+outline_size = 8
+outline_color = Color(0.047, 0.024, 0.024, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+content_margin_left = 32.0
+content_margin_top = 12.0
+content_margin_right = 32.0
+content_margin_bottom = 12.0
+bg_color = Color(0.11, 0.082, 0.063, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.52, 0.45, 0.365, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+content_margin_left = 32.0
+content_margin_top = 12.0
+content_margin_right = 32.0
+content_margin_bottom = 12.0
+bg_color = Color(0.18, 0.133, 0.102, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.83, 0.686, 0.216, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0.83, 0.686, 0.216, 0.3)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+content_margin_left = 32.0
+content_margin_top = 12.0
+content_margin_right = 32.0
+content_margin_bottom = 12.0
+bg_color = Color(0.067, 0.051, 0.039, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.3, 0.24, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+
+[sub_resource type="Theme" id="Theme_gameover_btn"]
+default_font = SubResource("SystemFont_medieval")
+default_font_size = 22
+Button/colors/font_color = Color(0.91, 0.851, 0.71, 1)
+Button/colors/font_hover_color = Color(1, 0.95, 0.82, 1)
+Button/colors/font_outline_color = Color(0.063, 0.039, 0.024, 1)
+Button/colors/font_pressed_color = Color(0.75, 0.7, 0.58, 1)
+Button/constants/outline_size = 4
+Button/styles/disabled = SubResource("StyleBoxFlat_btn_normal")
+Button/styles/focus = SubResource("StyleBoxEmpty_focus")
+Button/styles/hover = SubResource("StyleBoxFlat_btn_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_btn_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+
+[node name="GameOver" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+script = ExtResource("1_script")
+
+[node name="FondoNegro" type="ColorRect" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Contenido" type="CenterContainer" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Contenido"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Titulo" type="Label" parent="Contenido/VBoxContainer"]
+layout_mode = 2
+text = "HAS MUERTO"
+label_settings = SubResource("LabelSettings_titulo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Espacio" type="Control" parent="Contenido/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="BtnReintentar" type="Button" parent="Contenido/VBoxContainer"]
+custom_minimum_size = Vector2(260, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_gameover_btn")
+text = "REINTENTAR"
+
+[node name="BtnMenu" type="Button" parent="Contenido/VBoxContainer"]
+custom_minimum_size = Vector2(260, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_gameover_btn")
+text = "MENÚ PRINCIPAL"

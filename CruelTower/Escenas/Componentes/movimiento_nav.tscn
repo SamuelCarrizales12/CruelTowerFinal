@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://comp_movimiento_nav"]
+
+[ext_resource type="Script" path="res://Scripts/movimiento_nav.gd" id="1_nav"]
+
+[node name="MovimientoNav" type="NavigationAgent3D"]
+path_desired_distance = 0.5
+target_desired_distance = 0.8
+script = ExtResource("1_nav")
